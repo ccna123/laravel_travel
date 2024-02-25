@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Tour;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -41,6 +42,21 @@ class TourController extends Controller
             "tours" => $tours,
             "filter" => $request->input('searchTour')
         ]);
+    }
+
+    public function searchPage()
+    {
+        return Inertia::render("Search");
+    }
+
+    public function searchTour(Request $request)
+    {
+        try {
+            $tour = Booking::where('code', $request["searchInput"])->first();
+            return Inertia::render("Search", compact('tour'));
+        } catch (\Throwable $th) {
+            abort(404);
+        }
     }
 
     /**

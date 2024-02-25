@@ -60,9 +60,12 @@ function Nav() {
                     <li className="text-2xl hover:cursor-pointer hover:bg-gray-400 hover:text-black p-2 rounded-lg duration-150">
                         Services
                     </li>
-                    <li className="text-2xl hover:cursor-pointer hover:bg-gray-400 hover:text-black p-2 rounded-lg duration-150">
-                        Packages
-                    </li>
+                    <InertiaLink
+                        href="/tours/find"
+                        className="text-2xl hover:cursor-pointer hover:bg-gray-400 hover:text-black p-2 rounded-lg duration-150"
+                    >
+                        Search Tour
+                    </InertiaLink>
                     <li className="text-2xl hover:cursor-pointer hover:bg-gray-400 hover:text-black p-2 rounded-lg duration-150">
                         About
                     </li>

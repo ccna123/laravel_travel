@@ -2,7 +2,7 @@ import React from "react";
 
 const BookingInfo = () => {
     return (
-        <div className="bg-white rounded-md p-2 my-3 text-xl">
+        <div className=" bg-white rounded-md p-2 text-xl mt-4">
             <section>
                 <p>
                     <span>Customer: </span>
@@ -13,7 +13,7 @@ const BookingInfo = () => {
                     <span>ABC Street, XYZ City</span>
                 </p>
             </section>
-            <section className="flex items-center gap-4 justify-between">
+            <section className="flex flex-col items-start md:flex-row md:items-center md:gap-4 justify-between">
                 <p>
                     <span>Email: </span>
                     <span>scott@abc.com</span>
@@ -25,7 +25,7 @@ const BookingInfo = () => {
             </section>
 
             <section>
-                <div className="flex items-center gap-4 justify-between">
+                <div className="flex flex-col items-start md:flex-row md:items-center md:gap-4 justify-between">
                     <p>
                         <span>Destination: </span>
                         <span>Osaka</span>
@@ -35,7 +35,7 @@ const BookingInfo = () => {
                         <span>3</span>
                     </p>
                 </div>
-                <div className="flex items-center gap-4 justify-between">
+                <div className="flex flex-col items-start md:flex-row md:items-center md:gap-4 justify-between">
                     <p>
                         <span>Number of People: </span>
                         <span>4</span>
