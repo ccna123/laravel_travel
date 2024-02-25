@@ -1,26 +1,26 @@
 import React from "react";
 
-const BookingInfo = () => {
+const BookingInfo = ({ tour }) => {
     return (
         <div className=" bg-white rounded-md p-2 text-xl mt-4">
             <section>
                 <p>
                     <span>Customer: </span>
-                    <span>Scott</span>
+                    <span>{tour.customer_name}</span>
                 </p>
                 <p>
                     <span>Address: </span>
-                    <span>ABC Street, XYZ City</span>
+                    <span>{tour.customer_address}</span>
                 </p>
             </section>
             <section className="flex flex-col items-start md:flex-row md:items-center md:gap-4 justify-between">
                 <p>
                     <span>Email: </span>
-                    <span>scott@abc.com</span>
+                    <span>{tour.customer_email}</span>
                 </p>
                 <p>
                     <span>Phone: </span>
-                    <span>123-123-123-123</span>
+                    <span>{tour.customer_phone}</span>
                 </p>
             </section>
 
@@ -28,29 +28,29 @@ const BookingInfo = () => {
                 <div className="flex flex-col items-start md:flex-row md:items-center md:gap-4 justify-between">
                     <p>
                         <span>Destination: </span>
-                        <span>Osaka</span>
+                        <span>{tour.destination}</span>
                     </p>
                     <p>
                         <span>Number of Stays: </span>
-                        <span>3</span>
+                        <span>{tour.number_of_stay}</span>
                     </p>
                 </div>
                 <div className="flex flex-col items-start md:flex-row md:items-center md:gap-4 justify-between">
                     <p>
                         <span>Number of People: </span>
-                        <span>4</span>
+                        <span>{tour.number_of_people}</span>
                     </p>
                     <p>
                         <span>Adult: </span>
-                        <span>2</span>
+                        <span>{tour.number_of_adult}</span>
                     </p>
                     <p>
                         <span>Children: </span>
-                        <span>2</span>
+                        <span>{tour.number_of_children}</span>
                     </p>
                     <p>
                         <span>Transaportation: </span>
-                        <span>Plane</span>
+                        <span>{tour.transportation}</span>
                     </p>
                 </div>
             </section>

@@ -5,11 +5,6 @@ import BookingInfo from "./BookingInfo";
 import { Inertia } from "@inertiajs/inertia";
 
 function Order({ place, errors, booking_status, status }) {
-    const [peolple, setPeolple] = useState(1);
-    const [numOfStay, setNumOfStay] = useState(1);
-    const [total, setTotal] = useState(place.price);
-    const [selectOption, setSelectOption] = useState("plane");
-    const [showDetail, setShowDetail] = useState(false);
     const [form, setForm] = useState({
         customer_name: "",
         customer_email: "",
@@ -30,10 +25,6 @@ function Order({ place, errors, booking_status, status }) {
             ...prev,
             [key]: value,
         }));
-    };
-
-    const handleShowDetail = () => {
-        setShowDetail(!showDetail);
     };
 
     const handleSubmit = (e) => {
@@ -87,7 +78,6 @@ function Order({ place, errors, booking_status, status }) {
                 >
                     Details
                 </button>
-                {showDetail ? <BookingInfo /> : null}
             </div>
         </div>
     );

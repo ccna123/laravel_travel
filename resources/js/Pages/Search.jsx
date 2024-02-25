@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import SearchTable from "../components/SearchTable";
 import { Inertia } from "@inertiajs/inertia";
 import BookingInfo from "../components/BookingInfo";
 const Search = ({ tour }) => {

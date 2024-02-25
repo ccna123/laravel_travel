@@ -97,8 +97,8 @@ const TourInfoInput = ({
                         <option value="none">Select Transportation</option>
                         <option value="plane">Plane</option>
                         <option value="train">Train</option>
-                        <option value="bullet_train">Bullet Train</option>
-                        <option value="express_bus">Express Bus</option>
+                        <option value="bullet train">Bullet Train</option>
+                        <option value="express bus">Express Bus</option>
                     </select>
                 </section>
             </div>
