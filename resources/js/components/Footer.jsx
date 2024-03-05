@@ -28,7 +28,7 @@ export const Footer = () => {
                 </div>
             </div>
             <div className="shadow-lg">
-                <div className="bg-white rounded-t-xl grid grid-cols-3 gap-4 p-4">
+                <div className="bg-white rounded-t-xl grid md:grid-cols-3 gap-4 p-4">
                     <div>
                         <h1 className="uppercase font-bold text-2xl">Travel</h1>
                         <p>
