@@ -12,7 +12,7 @@ export const Footer = () => {
                 </div>
                 <div>
                     <input
-                        className="border md:w-80 w-full px-4 py-2 rounded-full flex items-center justify-center outline-none focus:outline-gray-500 duration-150"
+                        className="border md:w-80 w-full px-4 py-2 rounded-full flex items-center justify-center focus:outline-none"
                         type="email"
                         placeholder="Enter Email Address"
                     />

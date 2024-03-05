@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\TourController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +26,12 @@ Route::group(["prefix" => "tours"], function () {
     Route::get('/search', [TourController::class, 'searchPage']);
     Route::post('/search', [TourController::class, 'searchTour']);
 });
+
+Route::get("/login", [AuthController::class, 'index']);
+Route::post("/login", [AuthController::class, 'login']);
+
+Route::resource('admin', AdminController::class);
+
 Route::group(["prefix" => "booking"], function () {
     Route::get("/{tourId}", [BookingController::class, 'index'])->name("booking_index");
     Route::post("/", [BookingController::class, 'booking'])->name("booking_tour");

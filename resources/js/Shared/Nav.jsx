@@ -21,11 +21,11 @@ function Nav() {
     }, []);
 
     return (
-        <div className="bg-white flex flex-col lg:flex-row lg:justify-between lg:items-center p-4">
+        <div className="bg-white flex flex-col lg:flex-row lg:justify-between lg:items-center p-4 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
             <div className="flex justify-between">
                 <div className="flex items-center">
                     <img
-                        src="/imgs/logo.jpg"
+                        src="/imgs/airplane.png"
                         className="w-16 h-16 text-white"
                     />
                 </div>
@@ -66,9 +66,18 @@ function Nav() {
                     >
                         Search Tour
                     </InertiaLink>
-                    <li className="text-2xl hover:cursor-pointer hover:bg-gray-400 hover:text-black p-2 rounded-lg duration-150">
-                        About
-                    </li>
+                    <InertiaLink
+                        href="/login"
+                        className="text-2xl hover:cursor-pointer hover:bg-gray-400 hover:text-black p-2 rounded-lg duration-150"
+                    >
+                        Login
+                    </InertiaLink>
+                    <InertiaLink
+                        href="/admin"
+                        className="text-2xl hover:cursor-pointer hover:bg-gray-400 hover:text-black p-2 rounded-lg duration-150"
+                    >
+                        Admin
+                    </InertiaLink>
                 </ul>
             </nav>
 

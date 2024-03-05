@@ -2,8 +2,9 @@ import React, { memo } from "react";
 import { StarRating } from "./StarRating";
 import { InertiaLink } from "@inertiajs/inertia-react";
 
-function DestinationCard({ place }) {
+function DestinationCard({ place, handleToggleModal }) {
     const isBookingPage = window.location.href.includes("booking");
+    const isAdminsPage = window.location.href.includes("admin");
     return (
         <div className="rounded-xl shadow-xl hover:cursor-pointer">
             <div className="w-full h-96">
@@ -49,6 +50,25 @@ function DestinationCard({ place }) {
                             Go back
                         </button>
                     </InertiaLink>
+                ) : isAdminsPage ? (
+                    <div
+                        href={`booking/${place.id}`}
+                        className=" duration-150 mt-4 w-fit px-4 py-2 rounded-2xl flex items-center gap-4 "
+                    >
+                        <button
+                            onClick={() => handleToggleModal(true)}
+                            type="button"
+                            className="font-bold bg-orange-500 p-2 rounded-md text-white hover:cursor-pointer hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)] duration-150"
+                        >
+                            Edit
+                        </button>
+                        <button
+                            type="button"
+                            className="font-bold bg-red-500 p-2 rounded-md text-white hover:cursor-pointer hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)] duration-150"
+                        >
+                            Delete
+                        </button>
+                    </div>
                 ) : (
                     <InertiaLink
                         href={`booking/${place.id}`}
@@ -65,4 +85,4 @@ function DestinationCard({ place }) {
     );
 }
 
-export default memo(DestinationCard);
+export default DestinationCard;
