@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CustomerInfoInput from "./CustomerInfoInput";
 import TourInfoInput from "./TourInfoInput";
-import BookingInfo from "./BookingInfo";
+import Details from "./Details";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { notify } from "../helper/notfication";
 import { Inertia } from "@inertiajs/inertia";
+import { usePage } from "@inertiajs/inertia-react";
 
 function Order({ place, errors, booking_status, status }) {
     const [form, setForm] = useState({
@@ -18,6 +22,8 @@ function Order({ place, errors, booking_status, status }) {
         transportation: "",
     });
 
+    const [tourDetail, setTourDetail] = useState({});
+
     const handleOnChange = (e) => {
         const key = e.target.id;
         const value = e.target.value;
@@ -25,22 +31,62 @@ function Order({ place, errors, booking_status, status }) {
             ...prev,
             [key]: value,
         }));
+
+        if (key === "number_of_stay") {
+            setTourDetail((prev) => ({
+                ...prev,
+                number_of_stay: value,
+            }));
+        } else if (key === "number_of_people") {
+            setTourDetail((prev) => ({
+                ...prev,
+                number_of_people: value,
+            }));
+        }
+        if (key === "number_of_adult") {
+            setTourDetail((prev) => ({
+                ...prev,
+                number_of_adult: value,
+            }));
+        }
+        if (key === "number_of_children") {
+            setTourDetail((prev) => ({
+                ...prev,
+                number_of_children: value,
+            }));
+        }
+        if (key === "transportation") {
+            setTourDetail((prev) => ({
+                ...prev,
+                transportation: value,
+            }));
+        }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        Inertia.post("/booking", form);
+        Inertia.post("/booking", form, {
+            onSuccess: () => {
+                setForm({
+                    customer_name: "",
+                    customer_email: "",
+                    customer_address: "",
+                    customer_phone: "",
+                    destination: place.place_name_en,
+                    number_of_stay: "",
+                    number_of_people: "",
+                    number_of_adult: "",
+                    number_of_children: "",
+                    transportation: "",
+                });
+            },
+        });
+        // notify(booking_status, status);
     };
 
-    // useEffect(() => {
-    //     if (selectOption === "plane") {
-    //         setTotal(place.price * peolple + numOfStay * 10 + 100);
-    //     } else {
-    //         setTotal(place.price * peolple + numOfStay * 10 + 30);
-    //     }
-    // }, [peolple, numOfStay, selectOption]);
     return (
         <div className="bg-slate-200 rounded-xl shadow-xl p-4">
+            <ToastContainer />
             <div className="grid grid-cols-1 gap-5">
                 <form onSubmit={handleSubmit}>
                     <CustomerInfoInput
@@ -60,7 +106,7 @@ function Order({ place, errors, booking_status, status }) {
                         handleOnChange={handleOnChange}
                         errors={errors}
                     />
-                    {errors ? (
+                    {Object.keys(errors).length > 0 ? (
                         <p className="text-sm text-red-500 font-bold">
                             All fields must be filled
                         </p>
@@ -72,12 +118,8 @@ function Order({ place, errors, booking_status, status }) {
                         Booking
                     </button>
                 </form>
-                <button
-                    onClick={handleShowDetail}
-                    className="w-full bg-red-500 font-bold p-2 rounded-md text-white hover:shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]"
-                >
-                    Details
-                </button>
+
+                <Details tourDetail={tourDetail} place_price={place.price} />
             </div>
         </div>
     );

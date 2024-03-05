@@ -26,5 +26,5 @@ Route::group(["prefix" => "tours"], function () {
 });
 Route::group(["prefix" => "booking"], function () {
     Route::get("/{tourId}", [BookingController::class, 'index'])->name("booking_index");
-    Route::post("/", [BookingController::class, 'booking'])->name("booking_tour");
+    // Route::post("/", [BookingController::class, 'booking'])->name("booking_tour");
 });

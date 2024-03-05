@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import DestinationCard from "../components/DestinationCard";
 import Order from "../components/Order";
 import { usePage } from "@inertiajs/inertia-react";
