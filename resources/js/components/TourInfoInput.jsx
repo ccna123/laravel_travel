@@ -92,7 +92,7 @@ const TourInfoInput = ({
                         value={transportation}
                         onChange={handleOnChange}
                         id="transportation"
-                        className={`rounded-none rounded-e-lg ${
+                        className={`rounded-lg ${
                             errors.number_of_children
                                 ? "bg-red-300 border-red-300 text-red-500"
                                 : "bg-gray-50 border border-gray-300 text-gray-900"

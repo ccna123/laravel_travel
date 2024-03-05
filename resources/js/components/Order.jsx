@@ -1,92 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import CustomerInfoInput from "./CustomerInfoInput";
 import TourInfoInput from "./TourInfoInput";
 import Details from "./Details";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { notify } from "../helper/notfication";
-import { Inertia } from "@inertiajs/inertia";
-import { usePage } from "@inertiajs/inertia-react";
 
-function Order({ place, errors, booking_status, status }) {
-    const [form, setForm] = useState({
-        customer_name: "",
-        customer_email: "",
-        customer_address: "",
-        customer_phone: "",
-        destination: place.place_name_en,
-        number_of_stay: "",
-        number_of_people: "",
-        number_of_adult: "",
-        number_of_children: "",
-        transportation: "",
-    });
-
-    const [tourDetail, setTourDetail] = useState({});
-
-    const handleOnChange = (e) => {
-        const key = e.target.id;
-        const value = e.target.value;
-        setForm((prev) => ({
-            ...prev,
-            [key]: value,
-        }));
-
-        if (key === "number_of_stay") {
-            setTourDetail((prev) => ({
-                ...prev,
-                number_of_stay: value,
-            }));
-        } else if (key === "number_of_people") {
-            setTourDetail((prev) => ({
-                ...prev,
-                number_of_people: value,
-            }));
-        }
-        if (key === "number_of_adult") {
-            setTourDetail((prev) => ({
-                ...prev,
-                number_of_adult: value,
-            }));
-        }
-        if (key === "number_of_children") {
-            setTourDetail((prev) => ({
-                ...prev,
-                number_of_children: value,
-            }));
-        }
-        if (key === "transportation") {
-            setTourDetail((prev) => ({
-                ...prev,
-                transportation: value,
-            }));
-        }
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        Inertia.post("/booking", form, {
-            onSuccess: () => {
-                setForm({
-                    customer_name: "",
-                    customer_email: "",
-                    customer_address: "",
-                    customer_phone: "",
-                    destination: place.place_name_en,
-                    number_of_stay: "",
-                    number_of_people: "",
-                    number_of_adult: "",
-                    number_of_children: "",
-                    transportation: "",
-                });
-            },
-        });
-        // notify(booking_status, status);
-    };
-
+function Order({
+    place,
+    errors,
+    form,
+    tourDetail,
+    calculateNumberOfStay,
+    calculateNumberOfAdult,
+    calculateNumberOfChildren,
+    calculateTransportationFee,
+    calculateTotal,
+    handleOnChange,
+    handleSubmit,
+}) {
     return (
         <div className="bg-slate-200 rounded-xl shadow-xl p-4">
-            <ToastContainer />
             <div className="grid grid-cols-1 gap-5">
                 <form onSubmit={handleSubmit}>
                     <CustomerInfoInput
@@ -119,7 +50,15 @@ function Order({ place, errors, booking_status, status }) {
                     </button>
                 </form>
 
-                <Details tourDetail={tourDetail} place_price={place.price} />
+                <Details
+                    place_price={place.price}
+                    tourDetailInfo={tourDetail}
+                    calculateNumberOfAdult={calculateNumberOfAdult}
+                    calculateNumberOfChildren={calculateNumberOfChildren}
+                    calculateNumberOfStay={calculateNumberOfStay}
+                    calculateTransportationFee={calculateTransportationFee}
+                    calculateTotal={calculateTotal}
+                />
             </div>
         </div>
     );

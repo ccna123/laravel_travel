@@ -57,7 +57,9 @@ const BookingInfo = ({ tour }) => {
             <hr className="border border-slate-200 my-2" />
             <section className="flex justify-between items-center">
                 <p className="text-2xl font-bold">Total</p>
-                <p className="text-2xl text-red-500 font-bold">1200$</p>
+                <p className="text-2xl text-red-500 font-bold">
+                    {tour.total.toLocaleString()}$
+                </p>
             </section>
         </div>
     );

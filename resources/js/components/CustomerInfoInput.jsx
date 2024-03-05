@@ -1,5 +1,4 @@
 import React from "react";
-import Errors from "./Errors";
 const CustomerInfoInput = ({
     customer_name,
     customer_address,

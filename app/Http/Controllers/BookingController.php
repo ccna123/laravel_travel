@@ -34,7 +34,7 @@ class BookingController extends Controller
         $data = $request->validate([
             "customer_name" => "required",
             "customer_address" => "required",
-            "customer_email" => "required|email",
+            "customer_email" => "required|email|unique:bookings,customer_email",
             "customer_phone" => "required",
             "number_of_stay" => "required",
             "number_of_people" => "required",
@@ -42,30 +42,23 @@ class BookingController extends Controller
             "number_of_children" => "required",
             "transportation" => "required",
         ]);
-        // $booking = Booking::create([
-        //     "code" => $code,
-        //     "customer_name" => $request["customer_name"],
-        //     "customer_email" => $request["customer_email"],
-        //     "customer_address" => $request["customer_address"],
-        //     "customer_phone" => $request["customer_phone"],
-        //     "number_of_stay" => $request["number_of_stay"],
-        //     "number_of_people" => $request["number_of_people"],
-        //     "number_of_adult"   => $request["number_of_adult"],
-        //     "number_of_children" => $request["number_of_children"],
-        //     "destination" => $request["destination"],
-        //     "transportation" => $request["transportation"],
-        // ]);
-        $booking = true;
-        if ($booking) {
-            session()->put(["booking_status" => "Booking has been successfully", "status" => 200]);
-            return back()->with([
-                "message" => "Booking has been successfully"
-            ]);
-        }
-        session()->put(["booking_status" => "Booking has failed", "status" => 400]);
-        return back()->withInput()->withErrors([
-            "message" => "Booking has failed"
+        $booking = Booking::create([
+            "code" => $code,
+            "customer_name" => $request["customer_name"],
+            "customer_email" => $request["customer_email"],
+            "customer_address" => $request["customer_address"],
+            "customer_phone" => $request["customer_phone"],
+            "number_of_stay" => $request["number_of_stay"],
+            "number_of_people" => $request["number_of_people"],
+            "number_of_adult"   => $request["number_of_adult"],
+            "number_of_children" => $request["number_of_children"],
+            "destination" => $request["destination"],
+            "transportation" => $request["transportation"],
+            "total" => $request["total"]
         ]);
-        // dd($request->toArray(), $code);
+        if ($booking) {
+            return back();
+        }
+        return back();
     }
 }

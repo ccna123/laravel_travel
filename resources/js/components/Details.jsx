@@ -1,62 +1,32 @@
-import React, { useMemo } from "react";
+import React from "react";
 
-const Details = ({ tourDetail, place_price }) => {
-    const calculateNumberOfStay = useMemo(() => {
-        return tourDetail.number_of_stay * 10 || 0;
-    }, [tourDetail.number_of_stay]);
-    const calculateNumberOfAdult = useMemo(() => {
-        return tourDetail.number_of_adult * place_price || 0;
-    }, [tourDetail.number_of_adult]);
-    const calculateNumberOfChildren = useMemo(() => {
-        return (tourDetail.number_of_children * place_price) / 2 || 0;
-    }, [tourDetail.number_of_children]);
-
-    const calculateTransportationFee = useMemo(() => {
-        switch (tourDetail.transportation) {
-            case "plane":
-                return 100;
-            case "train":
-                return 60;
-            case "bullet train":
-                return 150;
-            case "express bus":
-                return 55;
-            default:
-                return 0;
-        }
-    }, [tourDetail.transportation]);
-    const calculateTotal = useMemo(() => {
-        return (
-            calculateNumberOfStay +
-            calculateNumberOfAdult +
-            calculateNumberOfAdult +
-            calculateTransportationFee
-        );
-    }, [
-        calculateNumberOfStay,
-        calculateNumberOfAdult,
-        calculateNumberOfChildren,
-        calculateTransportationFee,
-    ]);
-
+const Details = ({
+    tourDetailInfo,
+    place_price,
+    calculateNumberOfChildren,
+    calculateNumberOfStay,
+    calculateNumberOfAdult,
+    calculateTransportationFee,
+    calculateTotal,
+}) => {
     return (
         <section className="bg-white w-full p-3 rounded-md ">
             <div className="gap-4 grid grid-cols-2 items-center my-3">
                 <section className="w-full">
                     <p>
-                        Number of stays: {tourDetail.number_of_stay}{" "}
+                        Number of stays: {tourDetailInfo.number_of_stay}{" "}
                         <span>(10$/1 stay)</span>
                     </p>
                     <p>
-                        Adult: {tourDetail.number_of_adult}{" "}
+                        Adult: {tourDetailInfo.number_of_adult}{" "}
                         <span>({place_price}$/1 person)</span>
                     </p>
                     <p>
-                        Childrend: {tourDetail.number_of_children}{" "}
+                        Childrend: {tourDetailInfo.number_of_children}{" "}
                         <span>(283$/1 child)</span>
                     </p>
                     <p>
-                        Transportation: {tourDetail.transportation}{" "}
+                        Transportation: {tourDetailInfo.transportation}{" "}
                         <span>({calculateTransportationFee}$)</span>{" "}
                     </p>
                 </section>

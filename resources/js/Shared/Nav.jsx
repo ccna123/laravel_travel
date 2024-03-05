@@ -61,7 +61,7 @@ function Nav() {
                         Services
                     </li>
                     <InertiaLink
-                        href="/tours/find"
+                        href="/tours/search"
                         className="text-2xl hover:cursor-pointer hover:bg-gray-400 hover:text-black p-2 rounded-lg duration-150"
                     >
                         Search Tour
