@@ -12,8 +12,10 @@ class Tour extends Model
     protected $fillable = [
         'place_name_jp',
         'place_name_en',
-        'img',
+        'image',
         'departure_date',
         'price',
+        'location',
+        'description',
     ];
 }

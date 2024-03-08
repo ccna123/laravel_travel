@@ -31,7 +31,7 @@ class TourController extends Controller
             ->through(fn ($tour) => [
                 "id" => $tour->id,
                 "departure_date" => $tour->departure_date,
-                "img" => $tour->img,
+                "img" => $tour->image,
                 "place_name_en" => $tour->place_name_en,
                 "place_name_jp" => $tour->place_name_jp,
                 "price" => $tour->price

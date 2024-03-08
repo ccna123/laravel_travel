@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('bookings', function (Blueprint $table) {
-            $table->double("total")->default(0)->nullable();
+        Schema::table('tours', function (Blueprint $table) {
+            $table->string("location")->after("place_name_en")->nullable();
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('bookings', function (Blueprint $table) {
-            Schema::dropColumns("bookings", "total");
+        Schema::table('tours', function (Blueprint $table) {
+            Schema::dropColumns("tours", "location");
         });
     }
 };

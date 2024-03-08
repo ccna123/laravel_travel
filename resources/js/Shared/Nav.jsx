@@ -53,45 +53,31 @@ function Nav() {
                 <ul className="flex md:flex-row flex-col gap-8 p-2 text-black font-bold">
                     <InertiaLink
                         href="/tours"
-                        className="text-2xl hover:cursor-pointer hover:bg-gray-400 hover:text-black p-2 rounded-lg duration-150"
+                        className="text-2xl hover:cursor-pointer hover:bg-blue-600 hover:text-white p-2 rounded-lg duration-150"
                     >
                         Home
                     </InertiaLink>
-                    <li className="text-2xl hover:cursor-pointer hover:bg-gray-400 hover:text-black p-2 rounded-lg duration-150">
-                        Services
-                    </li>
+
                     <InertiaLink
                         href="/tours/search"
-                        className="text-2xl hover:cursor-pointer hover:bg-gray-400 hover:text-black p-2 rounded-lg duration-150"
+                        className="text-2xl hover:cursor-pointer hover:bg-blue-600 hover:text-white p-2 rounded-lg duration-150"
                     >
                         Search Tour
                     </InertiaLink>
                     <InertiaLink
                         href="/login"
-                        className="text-2xl hover:cursor-pointer hover:bg-gray-400 hover:text-black p-2 rounded-lg duration-150"
+                        className="text-2xl hover:cursor-pointer hover:bg-blue-600 hover:text-white p-2 rounded-lg duration-150"
                     >
                         Login
                     </InertiaLink>
                     <InertiaLink
                         href="/admin"
-                        className="text-2xl hover:cursor-pointer hover:bg-gray-400 hover:text-black p-2 rounded-lg duration-150"
+                        className="text-2xl hover:cursor-pointer hover:bg-blue-600 hover:text-white p-2 rounded-lg duration-150"
                     >
                         Admin
                     </InertiaLink>
                 </ul>
             </nav>
-
-            <div className="w-fit">
-                {isNavOpen && (
-                    <button
-                        type="button"
-                        className="
-          font-bold text-white w-full  uppercase bg-blue-600 hover:bg-green-400 duration-100 hover:text-black px-10 py-2 rounded-lg"
-                    >
-                        Book now
-                    </button>
-                )}
-            </div>
         </div>
     );
 }

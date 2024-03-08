@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tour;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response as FacadesResponse;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class AdminController extends Controller
@@ -13,16 +16,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $tours = Tour::all();
+        $tours = Tour::orderBy("id", "desc")->get();
         return Inertia::render("Admin", compact('tours'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -30,7 +25,20 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $data = $request->validate([
+        //     "place_name_jp" => "required",
+        //     "place_name_en" => "required",
+        //     "price" => ["required", "numeric", "gt:0"],
+        //     "location" => "required",
+        //     "description" => "required",
+        //     "departure_date" => "required",
+        //     "image" => [Rule::notIn(["null"])],
+        // ]);
+        // $file = $request->file("image");
+        // $fileName = $file->getClientOriginalName();
+        // $file->move(public_path() . "/imgs", $fileName);
+        // $data["image"] = $fileName;
+        // Tour::create($data);
     }
 
     /**
@@ -38,15 +46,21 @@ class AdminController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $tour = Tour::where("id", $id)->first();
+            return response()->json([
+                "tour" => $tour
+            ]);
+        } catch (\Throwable $th) {
+            abort(404);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
-    {
-        //
+    { {
+            $tour = Tour::findOrFail($id);
+            return Inertia::render("Edit", compact('tour'));
+        }
     }
 
     /**
@@ -54,7 +68,7 @@ class AdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dd($request->toArray(), $id);
     }
 
     /**
@@ -62,6 +76,12 @@ class AdminController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $tour = Tour::findOrFail($id)->first();
+        if ($tour) {
+            $tour->destroy($id);
+            $tour->save();
+        } else {
+            return redirect()->back();
+        }
     }
 }
