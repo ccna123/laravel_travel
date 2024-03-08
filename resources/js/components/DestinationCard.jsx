@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import { StarRating } from "./StarRating";
 import { InertiaLink } from "@inertiajs/inertia-react";
 
@@ -18,7 +18,7 @@ function DestinationCard({ place, handleToggleModal }) {
                 <h4 className="font-bold">{place.place_name_en}</h4>
                 <div className="flex items-center">
                     <i className="fa-solid fa-location-dot mr-4"></i>
-                    <p>日本</p>
+                    <p>{place.location}</p>
                 </div>
                 <p>Departure: {place.departure_date}</p>
                 <div className="flex gap-4 mt-4">

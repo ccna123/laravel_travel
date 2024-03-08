@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string("place_name_jp");
             $table->string("place_name_en");
-            $table->string("image");
+            $table->string("image")->nullable();
             $table->date("departure_date");
             $table->integer("price");
-            $table->integer("description");
+            $table->integer("description")->nullable();
             $table->timestamps();
         });
     }

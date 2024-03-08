@@ -34,7 +34,8 @@ class TourController extends Controller
                 "img" => $tour->image,
                 "place_name_en" => $tour->place_name_en,
                 "place_name_jp" => $tour->place_name_jp,
-                "price" => $tour->price
+                "price" => $tour->price,
+                "location" => $tour->location
             ]);
         // dump($request->toArray());
 

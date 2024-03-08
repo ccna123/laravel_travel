@@ -1,10 +1,42 @@
-import { InertiaLink } from "@inertiajs/inertia-react";
+import { InertiaLink, useForm } from "@inertiajs/inertia-react";
 import React from "react";
+import { handleImageChange } from "../helper/imageChange";
+import { className } from "../helper/error";
+import { notify } from "../helper/notfication";
+import { Inertia } from "@inertiajs/inertia";
+import { ToastContainer } from "react-toastify";
 
-const Edit = ({ tour }) => {
+const Edit = ({ tour, errors }) => {
+    const { data, processing, setData, put } = useForm({
+        place_name_jp: tour.place_name_jp || "",
+        place_name_en: tour.place_name_en || "",
+        location: tour.location || "",
+        price: tour.price || 1,
+        departure_date: tour.departure_date || "",
+        description: tour.description || "",
+        image: null,
+        _method: "PUT",
+    });
+
+    const onImageChange = (e) => handleImageChange(e, setData);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        Inertia.post(`/admin/${tour.id}`, data, {
+            onSuccess: () => {
+                notify("Update success!", 200);
+            },
+        });
+    };
+
     return (
         <section className="mt-10">
-            <form className="mx-auto w-[50%] my-4 shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)] p-4 rounded-md">
+            <ToastContainer />
+            <form
+                onSubmit={handleSubmit}
+                className="mx-auto w-[50%] my-4 shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)] p-4 rounded-md"
+            >
+                <input type="hidden" name="_method" value="PUT" />
                 <section className="grid md:grid-cols-3 gap-4 items-center">
                     <div className="mb-5">
                         <label className="block mb-2 text-sm font-medium text-gray-900 ">
@@ -13,9 +45,11 @@ const Edit = ({ tour }) => {
                         <input
                             type="text"
                             id="place_name_jp"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2 focus:outline-none"
-                            placeholder="name@flowbite.com"
-                            value={tour.place_name_jp}
+                            className={className(errors.place_name_jp)}
+                            value={data.place_name_jp}
+                            onChange={(e) =>
+                                setData("place_name_jp", e.target.value)
+                            }
                         />
                     </div>
                     <div className="mb-5">
@@ -25,9 +59,11 @@ const Edit = ({ tour }) => {
                         <input
                             type="text"
                             id="place_name_en"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2 focus:outline-none"
-                            placeholder="name@flowbite.com"
-                            value={tour.place_name_en}
+                            className={className(errors.place_name_en)}
+                            value={data.place_name_en}
+                            onChange={(e) =>
+                                setData("place_name_en", e.target.value)
+                            }
                         />
                     </div>
                     <div className="mb-5">
@@ -37,9 +73,11 @@ const Edit = ({ tour }) => {
                         <input
                             type="text"
                             id="location"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2 focus:outline-none"
-                            placeholder="name@flowbite.com"
-                            value={tour.location}
+                            className={className(errors.location)}
+                            value={data.location}
+                            onChange={(e) =>
+                                setData("location", e.target.value)
+                            }
                         />
                     </div>
                 </section>
@@ -51,9 +89,11 @@ const Edit = ({ tour }) => {
                         <input
                             type="date"
                             id="departure_date"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2 focus:outline-none"
-                            placeholder="name@flowbite.com"
-                            value={tour.departure_date}
+                            className={className(errors.departure_date)}
+                            value={data.departure_date}
+                            onChange={(e) =>
+                                setData("departure_date", e.target.value)
+                            }
                         />
                     </div>
                     <div className="mb-5">
@@ -64,13 +104,17 @@ const Edit = ({ tour }) => {
                             type="number"
                             min={1}
                             id="price"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2 focus:outline-none"
-                            placeholder="name@flowbite.com"
-                            value={tour.price}
+                            className={className(errors.price)}
+                            value={data.price}
+                            onChange={(e) => setData("price", e.target.value)}
                         />
                     </div>
                 </section>
-                <section className="grid grid-cols-2 items-center gap-2">
+                <section
+                    className={`grid ${
+                        data.image ? "grid-cols-2" : "grid-cols-1"
+                    }  items-center gap-2`}
+                >
                     <div className="mb-5">
                         <label
                             htmlFor="username-error"
@@ -80,15 +124,18 @@ const Edit = ({ tour }) => {
                         </label>
                         <input
                             type="file"
+                            name="image"
+                            onChange={(e) => onImageChange(e, setData)}
                             id="username-success"
-                            className="border-2 border-gray-300 p-2 rounded-md focus:outline-none w-full"
+                            className={className(errors.image)}
                         />
                     </div>
-                    <img
-                        src={`/imgs/${tour.img}`}
-                        alt=""
-                        className="h-[200px] w-full bg-cover"
-                    />
+                    {data.image ? (
+                        <img
+                            src={URL.createObjectURL(data.image)}
+                            className="h-[200px] w-full bg-cover"
+                        />
+                    ) : null}
                 </section>
 
                 <div className="mb-5">
@@ -96,11 +143,12 @@ const Edit = ({ tour }) => {
                         Description
                     </label>
                     <textarea
-                        value={tour.description}
+                        value={data.description}
+                        onChange={(e) => setData("description", e.target.value)}
                         id="description"
                         cols="20"
                         rows="10"
-                        className="bg-gray-50 border resize-none border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2 focus:outline-none"
+                        className={className(errors.description)}
                     />
                 </div>
                 <section className="grid grid-cols-2 items-center gap-4">

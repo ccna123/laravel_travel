@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tour;
-use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response as FacadesResponse;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
@@ -25,20 +23,20 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = $request->validate([
-        //     "place_name_jp" => "required",
-        //     "place_name_en" => "required",
-        //     "price" => ["required", "numeric", "gt:0"],
-        //     "location" => "required",
-        //     "description" => "required",
-        //     "departure_date" => "required",
-        //     "image" => [Rule::notIn(["null"])],
-        // ]);
-        // $file = $request->file("image");
-        // $fileName = $file->getClientOriginalName();
-        // $file->move(public_path() . "/imgs", $fileName);
-        // $data["image"] = $fileName;
-        // Tour::create($data);
+        $data = $request->validate([
+            "place_name_jp" => "required",
+            "place_name_en" => "required",
+            "price" => ["required", "numeric", "gt:0"],
+            "location" => "required",
+            "description" => "required",
+            "departure_date" => "required",
+            "image" => [Rule::notIn(["null"])],
+        ]);
+        $file = $request->file("image");
+        $fileName = $file->getClientOriginalName();
+        $file->move(public_path() . "/imgs", $fileName);
+        $data["image"] = $fileName;
+        Tour::create($data);
     }
 
     /**
@@ -68,7 +66,34 @@ class AdminController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        dd($request->toArray(), $id);
+        $tour = Tour::findOrFail($id);
+        if ($tour) {
+            if ($request->hasFile("image")) {
+                $file = $request->file("image");
+                $fileName = time() . "_" . uniqid() . "_" . $file->getClientOriginalName();
+                $file->move(public_path() . "/imgs", $fileName);
+                $tour->update([
+                    "place_name_jp" => $request["place_name_jp"],
+                    "place_name_en" => $request["place_name_en"],
+                    "location" => $request["location"],
+                    "price" => $request["price"],
+                    "departure_date" => $request["departure_date"],
+                    "description" => $request["description"],
+                    "image" => $fileName,
+                ]);
+            } else {
+                $tour->update([
+                    "place_name_jp" => $request["place_name_jp"],
+                    "place_name_en" => $request["place_name_en"],
+                    "location" => $request["location"],
+                    "price" => $request["price"],
+                    "departure_date" => $request["departure_date"],
+                    "description" => $request["description"],
+                ]);
+            }
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**

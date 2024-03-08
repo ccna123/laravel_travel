@@ -4,6 +4,7 @@ import AddModal from "../components/AddModal";
 import { Inertia } from "@inertiajs/inertia";
 import { notify } from "../helper/notfication";
 import { ToastContainer } from "react-toastify";
+import { handleImageChange } from "../helper/imageChange";
 
 const Admin = ({ tours, errors }) => {
     const [toggleModal, setToggleModal] = useState(false);
@@ -40,18 +41,7 @@ const Admin = ({ tours, errors }) => {
         });
     };
 
-    const onImageChange = (e) => {
-        const imageFile = e.target.files[0];
-        if (imageFile) {
-            const extension = imageFile.name.split(".").pop().toLowerCase();
-            if (["jpg", "png", "gif", "jpeg"].includes(extension)) {
-                setData("image", imageFile);
-            } else {
-                alert("Please select an image file");
-                e.target.value = null;
-            }
-        }
-    };
+    const onImageChange = (e) => handleImageChange(e, setData);
 
     const onAdd = (e) => {
         e.preventDefault();
