@@ -6,7 +6,7 @@ const Tab = ({ children, tabs, handleChangeTab, selectedTab }) => {
     };
 
     return (
-        <section className="m-4">
+        <section className="">
             <div className="mb-4">
                 <ul
                     className="flex flex-wrap -mb-px text-sm font-medium text-center"
