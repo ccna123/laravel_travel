@@ -31,13 +31,12 @@ class TourController extends Controller
             ->through(fn ($tour) => [
                 "id" => $tour->id,
                 "departure_date" => $tour->departure_date,
-                "img" => $tour->image,
+                "image" => $tour->image,
                 "place_name_en" => $tour->place_name_en,
                 "place_name_jp" => $tour->place_name_jp,
                 "price" => $tour->price,
                 "location" => $tour->location
             ]);
-        // dump($request->toArray());
 
         return Inertia::render("Home", [
             "tours" => $tours,

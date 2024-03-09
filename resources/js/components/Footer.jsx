@@ -1,4 +1,5 @@
 import React from "react";
+import { liStyle } from "../../styles/footerStyle/style";
 
 export const Footer = () => {
     return (
@@ -51,7 +52,7 @@ export const Footer = () => {
                             our agency
                         </h1>
                         <ul>
-                            <li className="flex items-center">
+                            <li className={liStyle()}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -68,7 +69,7 @@ export const Footer = () => {
                                 </svg>
                                 <p>Services</p>
                             </li>
-                            <li className="flex items-center">
+                            <li className={liStyle()}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -85,7 +86,7 @@ export const Footer = () => {
                                 </svg>
                                 <p>Insurance</p>
                             </li>
-                            <li className="flex items-center">
+                            <li className={liStyle()}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -102,7 +103,7 @@ export const Footer = () => {
                                 </svg>
                                 <p>Agency</p>
                             </li>
-                            <li className="flex items-center">
+                            <li className={liStyle()}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -119,7 +120,7 @@ export const Footer = () => {
                                 </svg>
                                 <p>Tourism</p>
                             </li>
-                            <li className="flex items-center">
+                            <li className={liStyle()}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -143,7 +144,7 @@ export const Footer = () => {
                             partners
                         </h1>
                         <ul>
-                            <li className="flex items-center">
+                            <li className={liStyle()}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -160,7 +161,7 @@ export const Footer = () => {
                                 </svg>
                                 <p>Booking</p>
                             </li>
-                            <li className="flex items-center">
+                            <li className={liStyle()}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -177,7 +178,7 @@ export const Footer = () => {
                                 </svg>
                                 <p>RentalCar</p>
                             </li>
-                            <li className="flex items-center">
+                            <li className={liStyle()}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -194,7 +195,7 @@ export const Footer = () => {
                                 </svg>
                                 <p>HostelWorld</p>
                             </li>
-                            <li className="flex items-center">
+                            <li className={liStyle()}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -211,7 +212,7 @@ export const Footer = () => {
                                 </svg>
                                 <p>Trivago</p>
                             </li>
-                            <li className="flex items-center">
+                            <li className={liStyle()}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"

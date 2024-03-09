@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { DestinationSection } from "../components/DestinationSection";
 import { Footer } from "../components/Footer";
 import { BackToTopBtn } from "../components/BackToTopBtn";
@@ -6,6 +6,11 @@ import { Main } from "../components/Main";
 import { Inertia } from "@inertiajs/inertia";
 
 function Home({ tours }) {
+    const [minPrice, setMinPrice] = useState(0);
+    const [maxPrice, setMaxPrice] = useState(0);
+    const [search, setSearch] = useState("");
+    const [date, setDate] = useState("");
+
     const handleSearchTour = (tourName) => {
         Inertia.get(
             "/tours",
@@ -14,8 +19,8 @@ function Home({ tours }) {
         );
     };
 
-    const handleResetSearchTour = () => {
-        Inertia.get("/tours");
+    const handleSelectDate = (e) => {
+        setDate(e.target.value);
     };
 
     const handleFilterTourByDate = (date) => {
@@ -40,18 +45,35 @@ function Home({ tours }) {
             { preserveState: true }
         );
     };
-    const handleCLearFilterTourByPrice = () => {
+
+    const handleClearFilter = () => {
         Inertia.get("/tours");
+    };
+
+    const handleFilter = (e) => {
+        e.preventDefault();
+        if (search !== "") {
+            handleSearchTour(search);
+        } else if (date !== "") {
+            handleFilterTourByDate(date);
+        } else if (minPrice > 0 || maxPrice > 0) {
+            handleFilterTourByPrice(minPrice, maxPrice);
+        }
     };
 
     return (
         <section className="overflow-hidden">
             <Main
-                handleSearchTour={handleSearchTour}
-                handleResetSearchTour={handleResetSearchTour}
-                handleFilterTourByDate={handleFilterTourByDate}
-                handleFilterTourByPrice={handleFilterTourByPrice}
-                handleCLearFilterTourByPrice={handleCLearFilterTourByPrice}
+                date={date}
+                setDate={setDate}
+                search={search}
+                setSearch={setSearch}
+                minPrice={minPrice}
+                maxPrice={maxPrice}
+                setMinPrice={setMinPrice}
+                setMaxPrice={setMaxPrice}
+                handleFilter={handleFilter}
+                handleClearFilter={handleClearFilter}
             />
             <DestinationSection tours={tours} />
             <Footer />

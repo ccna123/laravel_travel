@@ -5,6 +5,8 @@ import { Inertia } from "@inertiajs/inertia";
 import { notify } from "../helper/notfication";
 import { ToastContainer } from "react-toastify";
 import { handleImageChange } from "../helper/imageChange";
+import { tdStyle, thStyle } from "../../styles/adminStyle/style";
+import { btnStyle } from "../../styles/shareStyle/style";
 
 const Admin = ({ tours, errors }) => {
     const [toggleModal, setToggleModal] = useState(false);
@@ -64,22 +66,22 @@ const Admin = ({ tours, errors }) => {
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500">
                     <thead className="text-xs text-white uppercase bg-black shadow-[0px_4px_16px_rgba(17,17,26,0.1),_0px_8px_24px_rgba(17,17,26,0.1),_0px_16px_56px_rgba(17,17,26,0.1)]">
                         <tr>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className={thStyle()}>
                                 No.
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className={thStyle()}>
                                 Destination
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className={thStyle()}>
                                 Location
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className={thStyle()}>
                                 Departure Date
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className={thStyle()}>
                                 Price
                             </th>
-                            <th scope="col" className="px-6 py-3">
+                            <th scope="col" className={thStyle()}>
                                 Action
                             </th>
                         </tr>
@@ -87,30 +89,27 @@ const Admin = ({ tours, errors }) => {
                     <tbody>
                         {tours.map((place, index) => (
                             <tr key={place.id} className="odd:bg-slate-200 ">
-                                <th
-                                    scope="row"
-                                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
-                                >
+                                <td scope="row" className={tdStyle()}>
                                     {index + 1}
-                                </th>
-                                <td
-                                    scope="row"
-                                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap "
-                                >
+                                </td>
+                                <td scope="row" className={tdStyle()}>
                                     <span>{place.place_name_jp}</span>
                                     &nbsp;&nbsp;
                                     <span>{place.place_name_en}</span>
                                 </td>
-                                <td className="px-6 py-4">{place.location}</td>
-                                <td className="px-6 py-4">
+                                <td className={tdStyle()}>{place.location}</td>
+                                <td className={tdStyle()}>
                                     {place.departure_date}
                                 </td>
-                                <td className="px-6 py-4">${place.price}</td>
-                                <td className="px-6 py-4">
+                                <td className={tdStyle()}>${place.price}</td>
+                                <td className={tdStyle()}>
                                     <div className="grid grid-cols-2 gap-4 items-center">
                                         <InertiaLink
                                             href={`/admin/${place.id}/edit`}
-                                            className="hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)] duration-150 bg-blue-500 p-2 text-center rounded-md font-bold text-white w-full"
+                                            className={
+                                                btnStyle("edit") +
+                                                " text-center"
+                                            }
                                         >
                                             Edit
                                         </InertiaLink>
@@ -119,7 +118,7 @@ const Admin = ({ tours, errors }) => {
                                             onClick={(e) =>
                                                 onDelete(e, place.id)
                                             }
-                                            className="hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)] duration-150 bg-red-500 p-2 rounded-md font-bold text-white w-full"
+                                            className={btnStyle("delete")}
                                         >
                                             Delete
                                         </button>

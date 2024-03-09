@@ -2,6 +2,7 @@ import React from "react";
 import CustomerInfoInput from "./CustomerInfoInput";
 import TourInfoInput from "./TourInfoInput";
 import Details from "./Details";
+import { btnStyle } from "../../styles/shareStyle/style";
 
 function Order({
     place,
@@ -44,7 +45,7 @@ function Order({
                     ) : null}
                     <button
                         type="submit"
-                        className="w-full mt-4 bg-blue-500 font-bold p-2 rounded-md text-white hover:shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]"
+                        className={btnStyle("book") + " mt-5"}
                     >
                         Booking
                     </button>

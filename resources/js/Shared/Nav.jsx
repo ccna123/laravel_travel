@@ -1,5 +1,7 @@
 import { InertiaLink } from "@inertiajs/inertia-react";
 import React, { useEffect, useState } from "react";
+import navLink from "../../styles/navStyles/navLink";
+import navContainer from "../../styles/navStyles/navContainer";
 
 function Nav() {
     const [isNavOpen, setIsNavOpen] = useState(false);
@@ -50,30 +52,18 @@ function Nav() {
                     isNavOpen ? "flex" : "hidden"
                 }  left-0 z-10 top-14 w-fit md:ml-96`}
             >
-                <ul className="flex md:flex-row flex-col gap-8 p-2 text-black font-bold">
-                    <InertiaLink
-                        href="/tours"
-                        className="text-2xl hover:cursor-pointer hover:bg-blue-600 hover:text-white p-2 rounded-lg duration-150"
-                    >
+                <ul className={navContainer()}>
+                    <InertiaLink href="/tours" className={navLink()}>
                         Home
                     </InertiaLink>
 
-                    <InertiaLink
-                        href="/tours/search"
-                        className="text-2xl hover:cursor-pointer hover:bg-blue-600 hover:text-white p-2 rounded-lg duration-150"
-                    >
+                    <InertiaLink href="/tours/search" className={navLink()}>
                         Search Tour
                     </InertiaLink>
-                    <InertiaLink
-                        href="/login"
-                        className="text-2xl hover:cursor-pointer hover:bg-blue-600 hover:text-white p-2 rounded-lg duration-150"
-                    >
+                    <InertiaLink href="/login" className={navLink()}>
                         Login
                     </InertiaLink>
-                    <InertiaLink
-                        href="/admin"
-                        className="text-2xl hover:cursor-pointer hover:bg-blue-600 hover:text-white p-2 rounded-lg duration-150"
-                    >
+                    <InertiaLink href="/admin" className={navLink()}>
                         Admin
                     </InertiaLink>
                 </ul>
