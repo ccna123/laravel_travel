@@ -54,7 +54,8 @@ class BookingController extends Controller
             "number_of_children" => $request["number_of_children"],
             "destination" => $request["destination"],
             "transportation" => $request["transportation"],
-            "total" => $request["total"]
+            "total" => $request["total"],
+            "status" => "Booked"
         ]);
         if ($booking) {
             return back();

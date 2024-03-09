@@ -1,7 +1,7 @@
 import { InertiaLink, useForm } from "@inertiajs/inertia-react";
 import React from "react";
 import { handleImageChange } from "../helper/imageChange";
-import { className } from "../helper/error";
+import { errorStyle } from "../helper/error";
 import { notify } from "../helper/notfication";
 import { Inertia } from "@inertiajs/inertia";
 import { ToastContainer } from "react-toastify";
@@ -45,7 +45,7 @@ const Edit = ({ tour, errors }) => {
                         <input
                             type="text"
                             id="place_name_jp"
-                            className={className(errors.place_name_jp)}
+                            className={errorStyle(errors.place_name_jp)}
                             value={data.place_name_jp}
                             onChange={(e) =>
                                 setData("place_name_jp", e.target.value)
@@ -59,7 +59,7 @@ const Edit = ({ tour, errors }) => {
                         <input
                             type="text"
                             id="place_name_en"
-                            className={className(errors.place_name_en)}
+                            className={errorStyle(errors.place_name_en)}
                             value={data.place_name_en}
                             onChange={(e) =>
                                 setData("place_name_en", e.target.value)
@@ -73,7 +73,7 @@ const Edit = ({ tour, errors }) => {
                         <input
                             type="text"
                             id="location"
-                            className={className(errors.location)}
+                            className={errorStyle(errors.location)}
                             value={data.location}
                             onChange={(e) =>
                                 setData("location", e.target.value)
@@ -89,7 +89,7 @@ const Edit = ({ tour, errors }) => {
                         <input
                             type="date"
                             id="departure_date"
-                            className={className(errors.departure_date)}
+                            className={errorStyle(errors.departure_date)}
                             value={data.departure_date}
                             onChange={(e) =>
                                 setData("departure_date", e.target.value)
@@ -104,7 +104,7 @@ const Edit = ({ tour, errors }) => {
                             type="number"
                             min={1}
                             id="price"
-                            className={className(errors.price)}
+                            className={errorStyle(errors.price)}
                             value={data.price}
                             onChange={(e) => setData("price", e.target.value)}
                         />
@@ -127,7 +127,7 @@ const Edit = ({ tour, errors }) => {
                             name="image"
                             onChange={(e) => onImageChange(e, setData)}
                             id="username-success"
-                            className={className(errors.image)}
+                            className={errorStyle(errors.image)}
                         />
                     </div>
                     {data.image ? (
@@ -148,7 +148,7 @@ const Edit = ({ tour, errors }) => {
                         id="description"
                         cols="20"
                         rows="10"
-                        className={className(errors.description)}
+                        className={errorStyle(errors.description)}
                     />
                 </div>
                 <section className="grid grid-cols-2 items-center gap-4">

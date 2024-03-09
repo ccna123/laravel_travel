@@ -1,6 +1,5 @@
 import React from "react";
-import { className } from "../helper/error";
-import { ToastContainer } from "react-toastify";
+import { errorStyle } from "../helper/error";
 
 const AddModal = ({
     handleToggleModal,
@@ -47,7 +46,7 @@ const AddModal = ({
                                     setData("place_name_jp", e.target.value)
                                 }
                                 type="text"
-                                className={className(errors.place_name_jp)}
+                                className={errorStyle(errors.place_name_jp)}
                             />
                         </div>
                         <div className="mb-5">
@@ -63,7 +62,7 @@ const AddModal = ({
                                 onChange={(e) =>
                                     setData("place_name_en", e.target.value)
                                 }
-                                className={className(errors.place_name_en)}
+                                className={errorStyle(errors.place_name_en)}
                             />
                         </div>
                         <div className="mb-5">
@@ -79,7 +78,7 @@ const AddModal = ({
                                 onChange={(e) =>
                                     setData("location", e.target.value)
                                 }
-                                className={className(errors.location)}
+                                className={errorStyle(errors.location)}
                             />
                         </div>
                     </section>
@@ -97,7 +96,7 @@ const AddModal = ({
                                 onChange={(e) =>
                                     setData("departure_date", e.target.value)
                                 }
-                                className={className(errors.departure_date)}
+                                className={errorStyle(errors.departure_date)}
                             />
                         </div>
                         <div className="mb-5">
@@ -114,7 +113,7 @@ const AddModal = ({
                                 onChange={(e) =>
                                     setData("price", e.target.value)
                                 }
-                                className={className(errors.price)}
+                                className={errorStyle(errors.price)}
                             />
                         </div>
                     </section>
@@ -135,7 +134,7 @@ const AddModal = ({
                                 name="image"
                                 onChange={handleImageChange}
                                 id="username-success"
-                                className={className(errors.image)}
+                                className={errorStyle(errors.image)}
                             />
                         </div>
                         {data.image ? (
@@ -160,7 +159,7 @@ const AddModal = ({
                             onChange={(e) =>
                                 setData("description", e.target.value)
                             }
-                            className={className(errors.description)}
+                            className={errorStyle(errors.description)}
                         />
                     </div>
                     <div className="grid md:rid-cols-2 gap-4">

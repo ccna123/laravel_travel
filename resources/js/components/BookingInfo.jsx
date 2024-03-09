@@ -4,9 +4,18 @@ const BookingInfo = ({ tour }) => {
     return (
         <div className=" bg-white rounded-md p-2 text-xl mt-4">
             <section>
-                <p>
+                <p className="my-3">
                     <span>Customer: </span>
                     <span>{tour.customer_name}</span>
+                    <span
+                        className={`ml-10 ${
+                            tour.status === "Booked"
+                                ? "bg-green-500"
+                                : "bg-red-500"
+                        }  p-2 rounded-md font-bold text-white`}
+                    >
+                        {tour.status}
+                    </span>
                 </p>
                 <p>
                     <span>Address: </span>

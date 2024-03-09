@@ -1,4 +1,6 @@
 import React from "react";
+import { errorStyle } from "../helper/error";
+import { inputDivContainer, spanIcon } from "../../styles/inputInfoStyle/style";
 
 const TourInfoInput = ({
     number_of_stay,
@@ -14,8 +16,8 @@ const TourInfoInput = ({
             <legend className="font-bold">Tour Infomation</legend>
             <div className="flex flex-col gap-4">
                 <section className="flex flex-col lg:flex-row items-center justify-between gap-4">
-                    <div className="flex w-full">
-                        <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                    <div className={inputDivContainer()}>
+                        <span className={spanIcon()}>
                             <i className="fa-solid fa-hotel"></i>
                         </span>
                         <input
@@ -24,16 +26,12 @@ const TourInfoInput = ({
                             id="number_of_stay"
                             min={1}
                             type="number"
-                            className={`rounded-none rounded-e-lg ${
-                                errors.number_of_stay
-                                    ? "bg-red-300 border-red-300 placeholder:text-red-500"
-                                    : "bg-gray-50 border border-gray-300 text-gray-900"
-                            }   flex-1 min-w-0 w-full text-sm p-2.5 focus:outline-none`}
+                            className={errorStyle(errors.number_of_stay)}
                             placeholder="Number of stays"
                         />
                     </div>
-                    <div className="flex w-full">
-                        <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                    <div className={inputDivContainer()}>
+                        <span className={spanIcon()}>
                             <i className="fa-solid fa-people-group"></i>
                         </span>
                         <input
@@ -42,18 +40,14 @@ const TourInfoInput = ({
                             id="number_of_people"
                             min={1}
                             type="number"
-                            className={`rounded-none rounded-e-lg ${
-                                errors.number_of_people
-                                    ? "bg-red-300 border-red-300 placeholder:text-red-500"
-                                    : "bg-gray-50 border border-gray-300 text-gray-900"
-                            }   flex-1 min-w-0 w-full text-sm p-2.5 focus:outline-none`}
+                            className={errorStyle(errors.number_of_people)}
                             placeholder="Number of people"
                         />
                     </div>
                 </section>
-                <section className="flex flex-col lg:flex-row items-center justify-between gap-4">
-                    <div className="flex w-full">
-                        <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                <section className="grid grid-cols-3 gap-4 items-center">
+                    <div className={inputDivContainer()}>
+                        <span className={spanIcon()}>
                             <i className="fa-solid fa-user-tie"></i>
                         </span>
                         <input
@@ -62,16 +56,12 @@ const TourInfoInput = ({
                             type="number"
                             id="number_of_adult"
                             min={1}
-                            className={`rounded-none rounded-e-lg ${
-                                errors.number_of_adult
-                                    ? "bg-red-300 border-red-300 placeholder:text-red-500"
-                                    : "bg-gray-50 border border-gray-300 text-gray-900"
-                            }   flex-1 min-w-0 w-full text-sm p-2.5 focus:outline-none`}
+                            className={errorStyle(errors.number_of_adult)}
                             placeholder="Adult. Ex: 1"
                         />
                     </div>
-                    <div className="flex w-full">
-                        <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                    <div className={inputDivContainer()}>
+                        <span className={spanIcon()}>
                             <i className="fa-solid fa-children"></i>
                         </span>
                         <input
@@ -80,30 +70,27 @@ const TourInfoInput = ({
                             type="number"
                             id="number_of_children"
                             min={1}
-                            className={`rounded-none rounded-e-lg ${
-                                errors.number_of_children
-                                    ? "bg-red-300 border-red-300 placeholder:text-red-500"
-                                    : "bg-gray-50 border border-gray-300 text-gray-900"
-                            }   flex-1 min-w-0 w-full text-sm p-2.5 focus:outline-none`}
+                            className={errorStyle(errors.number_of_children)}
                             placeholder="Children. Ex: 2"
                         />
                     </div>
-                    <select
-                        value={transportation}
-                        onChange={handleOnChange}
-                        id="transportation"
-                        className={`rounded-lg ${
-                            errors.number_of_children
-                                ? "bg-red-300 border-red-300 text-red-500"
-                                : "bg-gray-50 border border-gray-300 text-gray-900"
-                        }   w-full text-sm p-2.5 focus:outline-none`}
-                    >
-                        <option value="none">Select Transportation</option>
-                        <option value="plane">Plane</option>
-                        <option value="train">Train</option>
-                        <option value="bullet train">Bullet Train</option>
-                        <option value="express bus">Express Bus</option>
-                    </select>
+                    <div className={inputDivContainer()}>
+                        <span className={spanIcon()}>
+                            <i className="fa-solid fa-car"></i>
+                        </span>
+                        <select
+                            value={transportation}
+                            onChange={handleOnChange}
+                            id="transportation"
+                            className={errorStyle(errors.transportation)}
+                        >
+                            <option value="none">Select Transportation</option>
+                            <option value="plane">Plane</option>
+                            <option value="train">Train</option>
+                            <option value="bullet train">Bullet Train</option>
+                            <option value="express bus">Express Bus</option>
+                        </select>
+                    </div>
                 </section>
             </div>
         </fieldset>

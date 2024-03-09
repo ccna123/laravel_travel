@@ -1,6 +1,8 @@
 import React from "react";
 import { StarRating } from "./StarRating";
 import { InertiaLink } from "@inertiajs/inertia-react";
+import { fontBold } from "../../styles/destinationCardStyle/style";
+import { btnStyle } from "../../styles/shareStyle/style";
 
 function DestinationCard({ place, handleToggleModal }) {
     const isBookingPage = window.location.href.includes("booking");
@@ -9,13 +11,13 @@ function DestinationCard({ place, handleToggleModal }) {
         <div className="rounded-xl shadow-xl hover:cursor-pointer">
             <div className="w-full h-96">
                 <img
-                    src={`/imgs/${place.img}`}
+                    src={`/imgs/${place.image}`}
                     className="rounded-t-xl w-full h-full"
                 />
             </div>
             <div className="p-5">
-                <h1 className="font-bold text-xl">{place.place_name_jp}</h1>
-                <h4 className="font-bold">{place.place_name_en}</h4>
+                <h1 className={fontBold()}>{place.place_name_jp}</h1>
+                <h4 className={fontBold()}>{place.place_name_en}</h4>
                 <div className="flex items-center">
                     <i className="fa-solid fa-location-dot mr-4"></i>
                     <p>{place.location}</p>
@@ -26,8 +28,8 @@ function DestinationCard({ place, handleToggleModal }) {
                 </div>
                 <hr className="border my-4" />
                 <div className="flex justify-around items-center">
-                    <p className="text-4xl font-bold">Price</p>
-                    <p className="text-4xl font-bold text-red-500">
+                    <p className={fontBold() + " text-4xl"}>Price</p>
+                    <p className={fontBold() + " text-4xl text-red-500"}>
                         ${place.price}
                     </p>
                 </div>
@@ -43,41 +45,35 @@ function DestinationCard({ place, handleToggleModal }) {
                 </div>
                 {isBookingPage ? (
                     <InertiaLink
+                        as="button"
                         href="/"
-                        className=" hover:bg-black hover:text-white duration-150 bg-orange-400 mt-4 w-fit px-4 py-2 rounded-2xl flex items-center gap-4 text-white"
+                        className={btnStyle("back") + " mt-5"}
                     >
-                        <button type="button" className="font-bold">
-                            Go back
-                        </button>
+                        Go back
                     </InertiaLink>
                 ) : isAdminsPage ? (
                     <div
                         href={`booking/${place.id}`}
-                        className=" duration-150 mt-4 w-fit px-4 py-2 rounded-2xl flex items-center gap-4 "
+                        className="duration-150 mt-4 w-fit px-4 py-2 rounded-2xl flex items-center gap-4 "
                     >
                         <button
                             onClick={() => handleToggleModal(true)}
                             type="button"
-                            className="font-bold bg-orange-500 p-2 rounded-md text-white hover:cursor-pointer hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)] duration-150"
+                            className={btnStyle("edit")}
                         >
                             Edit
                         </button>
-                        <button
-                            type="button"
-                            className="font-bold bg-red-500 p-2 rounded-md text-white hover:cursor-pointer hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)] duration-150"
-                        >
+                        <button type="button" className={btnStyle("delete")}>
                             Delete
                         </button>
                     </div>
                 ) : (
                     <InertiaLink
+                        as="button"
                         href={`booking/${place.id}`}
-                        className=" hover:bg-black hover:text-white duration-150 bg-green-400 mt-4 w-fit px-4 py-2 rounded-2xl flex items-center gap-4 text-white"
+                        className={btnStyle("book") + " mt-4"}
                     >
-                        <button type="button" className="font-bold">
-                            Book
-                        </button>
-                        <i className="fa-solid fa-folder"></i>
+                        Book
                     </InertiaLink>
                 )}
             </div>
