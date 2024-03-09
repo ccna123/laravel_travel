@@ -21,6 +21,7 @@ class Booking extends Model
         "number_of_adult",
         "number_of_children",
         "transportation",
-        "total"
+        "total",
+        "status"
     ];
 }

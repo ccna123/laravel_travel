@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Tour;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -15,7 +16,8 @@ class AdminController extends Controller
     public function index()
     {
         $tours = Tour::orderBy("id", "desc")->get();
-        return Inertia::render("Admin", compact('tours'));
+        $bookings = Booking::all();
+        return Inertia::render("Admin", compact(['tours', 'bookings']));
     }
 
     /**

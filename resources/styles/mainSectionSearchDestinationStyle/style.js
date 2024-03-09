@@ -1,5 +1,5 @@
 export const inputStyle = () => {
-    return "w-full bg-gray-200 border-none outline-none rounded-full";
+    return "w-full bg-gray-200 border-none focus:outline-none rounded-full";
 };
 
 export const textStyle = () => {
@@ -7,5 +7,5 @@ export const textStyle = () => {
 };
 
 export const priceInputStyle = () => {
-    return "w-full rounded-full px-2";
+    return "w-full rounded-full px-2 focus:outline-none";
 };
