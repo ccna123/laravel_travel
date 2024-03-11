@@ -1,6 +1,17 @@
 import React from "react";
 import { errorStyle } from "../helper/error";
 import { inputDivContainer, spanIcon } from "../../styles/inputInfoStyle/style";
+import { IErrors } from "../types/interface";
+
+type TourInfoInputProps = {
+    number_of_stay: number
+    number_of_people: number
+    number_of_adult: number
+    number_of_children: number
+    transportation: string
+    errors: IErrors
+    handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
 
 const TourInfoInput = ({
     number_of_stay,
@@ -10,7 +21,7 @@ const TourInfoInput = ({
     transportation,
     errors,
     handleOnChange,
-}) => {
+}: TourInfoInputProps) => {
     return (
         <fieldset className="border-2 border-gray-400 p-2 rounded-md">
             <legend className="font-bold">Tour Infomation</legend>
@@ -80,7 +91,7 @@ const TourInfoInput = ({
                         </span>
                         <select
                             value={transportation}
-                            onChange={handleOnChange}
+                            onChange={e => handleOnChange}
                             id="transportation"
                             className={errorStyle(errors.transportation)}
                         >

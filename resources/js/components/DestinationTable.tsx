@@ -2,8 +2,15 @@ import { InertiaLink } from "@inertiajs/inertia-react";
 import React from "react";
 import { tdStyle, thStyle } from "../../styles/adminStyle/style";
 import { btnStyle } from "../../styles/shareStyle/style";
+import { ITour } from "../types/interface";
+import { Link } from "@inertiajs/react";
 
-export const DestinationTable = ({ tours, onDelete }) => {
+type DestinationTableProps = {
+    tours: ITour[],
+    onDelete: (e: React.MouseEvent<HTMLButtonElement>, id: number) => void
+}
+
+export const DestinationTable = ({ tours, onDelete }: DestinationTableProps) => {
     return (
         <section>
             <table className="w-full text-sm text-left rtl:text-right text-gray-500">
@@ -30,7 +37,7 @@ export const DestinationTable = ({ tours, onDelete }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {tours.map((place, index) => (
+                    {tours.map((place: any, index: number) => (
                         <tr key={place.id} className="odd:bg-slate-200 ">
                             <td scope="row" className={tdStyle()}>
                                 {index + 1}
@@ -47,14 +54,14 @@ export const DestinationTable = ({ tours, onDelete }) => {
                             <td className={tdStyle()}>${place.price}</td>
                             <td className={tdStyle()}>
                                 <div className="grid grid-cols-2 gap-4 items-center">
-                                    <InertiaLink
+                                    <Link
                                         href={`/admin/${place.id}/edit`}
                                         className={
                                             btnStyle("edit") + " text-center"
                                         }
                                     >
                                         Edit
-                                    </InertiaLink>
+                                    </Link>
                                     <button
                                         type="button"
                                         onClick={(e) => onDelete(e, place.id)}

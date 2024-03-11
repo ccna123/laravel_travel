@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 export const StarRating = () => {
-  const [rating, setRating] = useState(null);
-  const [hover, setHover] = useState(null);
+  const [rating, setRating] = useState<number>();
+  const [hover, setHover] = useState<number | null>(null);
   return (
     <div>
       {[1, 2, 3, 4, 5].map((star, index) => {
@@ -16,9 +16,8 @@ export const StarRating = () => {
               onClick={() => setRating(ratingVal)}
             />
             <i
-              className={`fa-solid fa-star fa-xl transition-colors duration-150 ${
-                ratingVal <= (hover || rating) ? "text-yellow-300" : ""
-              }`}
+              className={`fa-solid fa-star fa-xl transition-colors duration-150 ${ratingVal <= (hover ?? rating) ? "text-yellow-300" : ""
+                }`}
               onMouseEnter={() => setHover(ratingVal)}
               onMouseLeave={() => setHover(null)}
             ></i>

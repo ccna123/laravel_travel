@@ -5,8 +5,10 @@ import { Inertia } from "@inertiajs/inertia";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { notify } from "../helper/notfication";
-function Booking({ tour, booking_status, status, errors }) {
-    const [form, setForm] = useState({
+import { BookingInfo, ITour, ITourDetail } from "../types/interface";
+import { useForm } from "@inertiajs/inertia-react";
+function Booking({ tour, errors }: { tour: ITour, errors: {} }) {
+    const { data, setData, processing, reset } = useForm({
         customer_name: "",
         customer_email: "",
         customer_address: "",
@@ -20,65 +22,64 @@ function Booking({ tour, booking_status, status, errors }) {
         total: 0,
     });
 
-    const [tourDetail, setTourDetail] = useState({});
+    const [tourDetail, setTourDetail] = useState<ITourDetail>({
+        number_of_stay: 0,
+        number_of_adult: 0,
+        number_of_children: 0,
+        transportation: ""
+    });
 
-    const handleOnChange = (e) => {
+    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const key = e.target.id;
         const value = e.target.value;
-        setForm((prev) => ({
+        setData((prev) => ({
             ...prev,
             [key]: value,
         }));
 
         if (key === "number_of_stay") {
             setTourDetail((prev) => ({
-                ...prev,
-                number_of_stay: value,
+                ...(prev as ITourDetail),
+                number_of_stay: Number(value),
             }));
         } else if (key === "number_of_people") {
             setTourDetail((prev) => ({
-                ...prev,
-                number_of_people: value,
+                ...(prev as ITourDetail),
+                number_of_people: Number(value),
             }));
         }
         if (key === "number_of_adult") {
             setTourDetail((prev) => ({
-                ...prev,
-                number_of_adult: value,
+                ...(prev as ITourDetail),
+                number_of_adult: Number(value),
             }));
         }
         if (key === "number_of_children") {
             setTourDetail((prev) => ({
-                ...prev,
-                number_of_children: value,
+                ...(prev as ITourDetail),
+                number_of_children: Number(value),
             }));
         }
         if (key === "transportation") {
             setTourDetail((prev) => ({
-                ...prev,
+                ...(prev as ITourDetail),
                 transportation: value,
             }));
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
-        Inertia.post("/booking", form, {
+        Inertia.post("/booking", data, {
             onSuccess: () => {
-                setForm({
-                    customer_name: "",
-                    customer_email: "",
-                    customer_address: "",
-                    customer_phone: "",
-                    destination: tour.place_name_en,
-                    number_of_stay: "",
-                    number_of_people: "",
-                    number_of_adult: "",
-                    number_of_children: "",
-                    transportation: "",
+                reset()
+                setTourDetail({
+                    number_of_stay: 0,
+                    number_of_adult: 0,
+                    number_of_children: 0,
+                    transportation: ""
                 });
-                setTourDetail({});
-                notify(booking_status, status);
+                notify("Booking successfully", 200);
             },
         });
     };
@@ -122,7 +123,7 @@ function Booking({ tour, booking_status, status, errors }) {
     ]);
 
     useEffect(() => {
-        setForm((prev) => ({
+        setData((prev) => ({
             ...prev,
             total: calculateTotal,
         }));
@@ -134,9 +135,7 @@ function Booking({ tour, booking_status, status, errors }) {
             <Order
                 place={tour}
                 errors={errors}
-                booking_status={booking_status}
-                status={status}
-                form={form}
+                data={data}
                 tourDetail={tourDetail}
                 calculateNumberOfStay={calculateNumberOfStay}
                 calculateNumberOfAdult={calculateNumberOfAdult}

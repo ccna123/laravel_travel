@@ -1,7 +1,7 @@
 import { toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export const notify = (message, status) => {
+export const notify = (message: string, status: 200 | 300 | 400) => {
     if (status === 200) {
         toast.success(message, {
             position: "top-right",

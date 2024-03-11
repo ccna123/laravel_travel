@@ -2,6 +2,17 @@ import React from "react";
 import { errorStyle } from "../helper/error";
 import { inputDivContainer, spanIcon } from "../../styles/inputInfoStyle/style";
 import { fontBold } from "../../styles/destinationCardStyle/style";
+import { IBookingInfo, IErrors } from "../types/interface";
+
+type CustomerInfoInputProps = {
+    customer_name: string
+    customer_address: string
+    customer_email: string
+    customer_phone: string
+    errors: IErrors
+    handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+
 const CustomerInfoInput = ({
     customer_name,
     customer_address,
@@ -9,7 +20,7 @@ const CustomerInfoInput = ({
     customer_phone,
     errors,
     handleOnChange,
-}) => {
+}: CustomerInfoInputProps) => {
     return (
         <fieldset className="border-2 border-gray-400 p-2 rounded-md">
             <legend className={fontBold()}>Customer Infomation</legend>

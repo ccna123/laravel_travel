@@ -24,6 +24,7 @@ Route::get("/", function () {
 });
 Route::group(["prefix" => "tours"], function () {
     Route::get('/', [TourController::class, 'index'])->name("tours");
+    Route::get('/test', [TourController::class, 'test']);
     Route::get('/search', [TourController::class, 'searchPage']);
     Route::post('/search', [TourController::class, 'searchTour']);
 });

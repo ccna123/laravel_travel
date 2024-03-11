@@ -4,26 +4,33 @@ import { Footer } from "../components/Footer";
 import { BackToTopBtn } from "../components/BackToTopBtn";
 import { Main } from "../components/Main";
 import { Inertia } from "@inertiajs/inertia";
+import { ITours } from "../types/interface";
 
-function Home({ tours }) {
+function Home({ tours }: { tours: ITours }) {
+
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(0);
     const [search, setSearch] = useState("");
     const [date, setDate] = useState("");
 
-    const handleSearchTour = (tourName) => {
+    const handleSearchTour = (tourName: string) => {
         Inertia.get(
             "/tours",
             { searchTour: tourName },
-            { preserveState: true }
+            {
+                preserveState: true, onSuccess: (data) => {
+                    console.log(data);
+
+                }
+            },
+
         );
     };
-
-    const handleSelectDate = (e) => {
+    const handleSelectDate = (e: React.ChangeEvent<HTMLInputElement>) => {
         setDate(e.target.value);
     };
 
-    const handleFilterTourByDate = (date) => {
+    const handleFilterTourByDate = (date: string) => {
         if (date === "") {
             Inertia.get("/tours");
         } else {
@@ -35,7 +42,7 @@ function Home({ tours }) {
         }
     };
 
-    const handleFilterTourByPrice = (minPrice, maxPrice) => {
+    const handleFilterTourByPrice = (minPrice: number, maxPrice: number) => {
         Inertia.get(
             "/tours",
             {
@@ -50,7 +57,7 @@ function Home({ tours }) {
         Inertia.get("/tours");
     };
 
-    const handleFilter = (e) => {
+    const handleFilter = (e: React.ChangeEvent<HTMLInputElement>): void => {
         e.preventDefault();
         if (search !== "") {
             handleSearchTour(search);

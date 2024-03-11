@@ -43,7 +43,6 @@ class TourController extends Controller
             "filter" => $request->input('searchTour')
         ]);
     }
-
     public function searchPage()
     {
         return Inertia::render("Search");
