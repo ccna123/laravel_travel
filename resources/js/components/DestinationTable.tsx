@@ -37,7 +37,7 @@ export const DestinationTable = ({ tours, onDelete }: DestinationTableProps) => 
                     </tr>
                 </thead>
                 <tbody>
-                    {tours.map((place: any, index: number) => (
+                    {tours.map((place: ITour, index: number) => (
                         <tr key={place.id} className="odd:bg-slate-200 ">
                             <td scope="row" className={tdStyle()}>
                                 {index + 1}
@@ -64,7 +64,7 @@ export const DestinationTable = ({ tours, onDelete }: DestinationTableProps) => 
                                     </Link>
                                     <button
                                         type="button"
-                                        onClick={(e) => onDelete(e, place.id)}
+                                        onClick={(e) => place.id !== undefined ? onDelete(e, place.id) : null}
                                         className={btnStyle("delete")}
                                     >
                                         Delete
