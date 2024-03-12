@@ -2,14 +2,14 @@ import React from "react";
 import { errorStyle } from "../helper/error";
 import { inputDivContainer, spanIcon } from "../../styles/inputInfoStyle/style";
 import { fontBold } from "../../styles/destinationCardStyle/style";
-import { IBookingInfo, IErrors } from "../types/interface";
+import { TErrors } from "../types/type";
 
 type CustomerInfoInputProps = {
     customer_name: string
     customer_address: string
     customer_email: string
     customer_phone: string
-    errors: IErrors
+    errors: TErrors
     handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
@@ -34,7 +34,7 @@ const CustomerInfoInput = ({
                         onChange={handleOnChange}
                         type="text"
                         id="customer_name"
-                        className={errorStyle(errors.customer_name)}
+                        className={errorStyle(errors, errors.customer_name)}
                         placeholder="Customer Name"
                     />
                 </div>
@@ -47,7 +47,7 @@ const CustomerInfoInput = ({
                         onChange={handleOnChange}
                         type="text"
                         id="customer_address"
-                        className={errorStyle(errors.customer_address)}
+                        className={errorStyle(errors, errors.customer_address)}
                         placeholder="Address"
                     />
                 </div>
@@ -61,7 +61,7 @@ const CustomerInfoInput = ({
                             onChange={handleOnChange}
                             type="email"
                             id="customer_email"
-                            className={errorStyle(errors.customer_email)}
+                            className={errorStyle(errors, errors.customer_email)}
                             placeholder="Email Address"
                         />
                     </div>
@@ -74,7 +74,7 @@ const CustomerInfoInput = ({
                             onChange={handleOnChange}
                             type="text"
                             id="customer_phone"
-                            className={errorStyle(errors.customer_phone)}
+                            className={errorStyle(errors, errors.customer_phone)}
                             placeholder="Phone Number"
                         />
                     </div>

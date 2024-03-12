@@ -1,16 +1,12 @@
-import { InertiaLink } from "@inertiajs/inertia-react";
 import React from "react";
+import { TLink } from "../types/type";
+import { Link } from "@inertiajs/react";
 
-type linkProps<> = {
-    label: string;
-    active: boolean;
-    url: string
-}
 
-const Paginator = ({ links }: { links: linkProps[] }) => {
+const Paginator = ({ links }: { links: TLink[] }) => {
     return (
         <div className="text-center mt-2 flex gap-4 justify-center">
-            {links?.map((link: linkProps) => {
+            {links.map((link: TLink) => {
                 return (
                     <div
                         key={link.label}
@@ -20,29 +16,29 @@ const Paginator = ({ links }: { links: linkProps[] }) => {
                             } px-3 py-2 rounded`}
                     >
                         {link.label === "&laquo; Previous" ? (
-                            <InertiaLink
+                            <Link
                                 preserveScroll={true}
                                 preserveState={true}
                                 href={link.url}
                             >
                                 &laquo; Previous
-                            </InertiaLink>
+                            </Link>
                         ) : link.label === "Next &raquo;" ? (
-                            <InertiaLink
+                            <Link
                                 preserveScroll={true}
                                 preserveState={true}
                                 href={link.url}
                             >
                                 Next &raquo;
-                            </InertiaLink>
+                            </Link>
                         ) : (
-                            <InertiaLink
+                            <Link
                                 preserveScroll={true}
                                 preserveState={true}
                                 href={link.url}
                             >
                                 {link.label}
-                            </InertiaLink>
+                            </Link>
                         )}
                     </div>
                 );

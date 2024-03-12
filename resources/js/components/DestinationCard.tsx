@@ -4,8 +4,10 @@ import { InertiaLink } from "@inertiajs/inertia-react";
 import { fontBold } from "../../styles/destinationCardStyle/style";
 import { btnStyle } from "../../styles/shareStyle/style";
 import { ITour } from "../types/interface";
+import { TTour } from "../types/type";
+import { Link } from "@inertiajs/react";
 
-function DestinationCard({ place }: { place: ITour }) {
+function DestinationCard({ place }: { place: TTour }) {
     const isBookingPage = window.location.href.includes("booking");
     const isAdminsPage = window.location.href.includes("admin");
     return (
@@ -45,15 +47,15 @@ function DestinationCard({ place }: { place: ITour }) {
                     </p>
                 </div>
                 {isBookingPage ? (
-                    <InertiaLink
+                    <Link
                         as="button"
                         href="/"
                         className={btnStyle("back") + " mt-5"}
                     >
                         Go back
-                    </InertiaLink>
+                    </Link>
                 ) : isAdminsPage ? (
-                    <InertiaLink
+                    <Link
                         href={`booking/${place.id}`}
                         className="duration-150 mt-4 w-fit px-4 py-2 rounded-2xl flex items-center gap-4 "
                     >
@@ -66,15 +68,15 @@ function DestinationCard({ place }: { place: ITour }) {
                         <button type="button" className={btnStyle("delete")}>
                             Delete
                         </button>
-                    </InertiaLink>
+                    </Link>
                 ) : (
-                    <InertiaLink
+                    <Link
                         as="button"
                         href={`booking/${place.id}`}
                         className={btnStyle("book") + " mt-4"}
                     >
                         Book
-                    </InertiaLink>
+                    </Link>
                 )}
             </div>
         </div>

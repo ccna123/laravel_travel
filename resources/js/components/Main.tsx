@@ -17,7 +17,7 @@ type MainProps = {
     setSearch: React.Dispatch<React.SetStateAction<string>>
     setDate: React.Dispatch<React.SetStateAction<string>>
     handleClearFilter: () => void,
-    handleFilter: (e: React.ChangeEvent<HTMLInputElement>) => void
+    handleFilter: (e: React.MouseEvent<HTMLButtonElement>) => void,
 
 }
 
@@ -117,7 +117,7 @@ export const Main = ({
                         <button
                             type="button"
                             className={btnStyle("filter")}
-                            onClick={e => handleFilter}
+                            onClick={e => handleFilter(e)}
                         >
                             Filter
                         </button>

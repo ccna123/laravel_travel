@@ -3,10 +3,10 @@ import { DestinationSection } from "../components/DestinationSection";
 import { Footer } from "../components/Footer";
 import { BackToTopBtn } from "../components/BackToTopBtn";
 import { Main } from "../components/Main";
-import { Inertia } from "@inertiajs/inertia";
-import { ITours } from "../types/interface";
+import { TTours } from "../types/type";
+import { router } from "@inertiajs/react";
 
-function Home({ tours }: { tours: ITours }) {
+function Home({ tours }: { tours: TTours }) {
 
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(0);
@@ -14,27 +14,21 @@ function Home({ tours }: { tours: ITours }) {
     const [date, setDate] = useState("");
 
     const handleSearchTour = (tourName: string) => {
-        Inertia.get(
+        router.get(
             "/tours",
             { searchTour: tourName },
             {
-                preserveState: true, onSuccess: (data) => {
-                    console.log(data);
-
-                }
+                preserveState: true,
+                preserveScroll: true
             },
 
         );
     };
-    const handleSelectDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setDate(e.target.value);
-    };
-
     const handleFilterTourByDate = (date: string) => {
         if (date === "") {
-            Inertia.get("/tours");
+            router.get("/tours");
         } else {
-            Inertia.get(
+            router.get(
                 "/tours",
                 { filterDate: date },
                 { preserveState: true }
@@ -43,7 +37,7 @@ function Home({ tours }: { tours: ITours }) {
     };
 
     const handleFilterTourByPrice = (minPrice: number, maxPrice: number) => {
-        Inertia.get(
+        router.get(
             "/tours",
             {
                 minPrice,
@@ -54,10 +48,10 @@ function Home({ tours }: { tours: ITours }) {
     };
 
     const handleClearFilter = () => {
-        Inertia.get("/tours");
+        router.get("/tours");
     };
 
-    const handleFilter = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const handleFilter = (e: React.MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
         if (search !== "") {
             handleSearchTour(search);

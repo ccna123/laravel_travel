@@ -1,7 +1,7 @@
 import React from "react";
 import { errorStyle } from "../helper/error";
 import { inputDivContainer, spanIcon } from "../../styles/inputInfoStyle/style";
-import { IErrors } from "../types/interface";
+import { TErrors } from "../types/type";
 
 type TourInfoInputProps = {
     number_of_stay: number
@@ -9,8 +9,8 @@ type TourInfoInputProps = {
     number_of_adult: number
     number_of_children: number
     transportation: string
-    errors: IErrors
-    handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    errors: TErrors
+    handleOnChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void
 }
 
 const TourInfoInput = ({
@@ -37,7 +37,7 @@ const TourInfoInput = ({
                             id="number_of_stay"
                             min={1}
                             type="number"
-                            className={errorStyle(errors.number_of_stay)}
+                            className={errorStyle(errors, errors.number_of_stay)}
                             placeholder="Number of stays"
                         />
                     </div>
@@ -51,7 +51,7 @@ const TourInfoInput = ({
                             id="number_of_people"
                             min={1}
                             type="number"
-                            className={errorStyle(errors.number_of_people)}
+                            className={errorStyle(errors, errors.number_of_people)}
                             placeholder="Number of people"
                         />
                     </div>
@@ -67,7 +67,7 @@ const TourInfoInput = ({
                             type="number"
                             id="number_of_adult"
                             min={1}
-                            className={errorStyle(errors.number_of_adult)}
+                            className={errorStyle(errors, errors.number_of_adult)}
                             placeholder="Adult. Ex: 1"
                         />
                     </div>
@@ -81,7 +81,7 @@ const TourInfoInput = ({
                             type="number"
                             id="number_of_children"
                             min={1}
-                            className={errorStyle(errors.number_of_children)}
+                            className={errorStyle(errors, errors.number_of_children)}
                             placeholder="Children. Ex: 2"
                         />
                     </div>
@@ -91,9 +91,9 @@ const TourInfoInput = ({
                         </span>
                         <select
                             value={transportation}
-                            onChange={e => handleOnChange}
+                            onChange={handleOnChange}
                             id="transportation"
-                            className={errorStyle(errors.transportation)}
+                            className={errorStyle(errors, errors.transportation)}
                         >
                             <option value="none">Select Transportation</option>
                             <option value="plane">Plane</option>

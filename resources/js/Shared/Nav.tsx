@@ -62,9 +62,9 @@ function Nav() {
                     <Link href="/tours/search" className={navLink()}>
                         Search Tour
                     </Link>
-                    <Link href="/login" className={navLink()}>
+                    {/* <Link href="/login" className={navLink()}>
                         Login
-                    </Link>
+                    </Link> */}
                     <Link href="/admin" className={navLink()}>
                         Admin
                     </Link>

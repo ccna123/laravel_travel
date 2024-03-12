@@ -3,28 +3,28 @@ import CustomerInfoInput from "./CustomerInfoInput";
 import TourInfoInput from "./TourInfoInput";
 import Details from "./Details";
 import { btnStyle } from "../../styles/shareStyle/style";
-import { Order } from "../types/type";
+import { Order, TBookingDetailInfo, TBookingInfo, TErrors, TTour } from "../types/type";
 import { IBookingInfo, IErrors, ITour, ITourDetail } from "../types/interface";
 
 type OrderProps = {
-    place: ITour,
-    errors: IErrors,
-    data: IBookingInfo,
-    tourDetail: ITourDetail,
+    errors: TErrors,
+    data: TBookingInfo,
+    processing: boolean,
+    destinationPrice: number,
     calculateNumberOfStay: number,
     calculateNumberOfAdult: number,
     calculateNumberOfChildren: number,
     calculateTransportationFee: number,
     calculateTotal: number,
-    handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    handleOnChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void,
     handleSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void,
 }
 
 function Order({
-    place,
     errors,
     data,
-    tourDetail,
+    processing,
+    destinationPrice,
     calculateNumberOfStay,
     calculateNumberOfAdult,
     calculateNumberOfChildren,
@@ -60,17 +60,18 @@ function Order({
                         </p>
                     ) : null}
                     <button
-                        onClick={e => handleSubmit}
-                        type="submit"
+                        onClick={e => handleSubmit(e)}
+                        type="button"
                         className={btnStyle("book") + " mt-5"}
+                        disabled={processing}
                     >
                         Booking
                     </button>
                 </form>
 
                 <Details
-                    place_price={place.price}
-                    tourDetailInfo={tourDetail}
+                    tour={data}
+                    destinationPrice={destinationPrice}
                     calculateNumberOfAdult={calculateNumberOfAdult}
                     calculateNumberOfChildren={calculateNumberOfChildren}
                     calculateNumberOfStay={calculateNumberOfStay}
