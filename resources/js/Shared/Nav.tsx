@@ -24,7 +24,7 @@ function Nav() {
     }, []);
 
     return (
-        <div className="bg-white flex flex-col lg:flex-row lg:justify-between lg:items-center p-4 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+        <div className="bg-white flex flex-col lg:flex-row lg:justify-between lg:items-center p-4">
             <div className="flex justify-between">
                 <div className="flex items-center">
                     <Link href="/">
@@ -52,7 +52,7 @@ function Nav() {
             </div>
             <nav
                 className={`${isNavOpen ? "flex" : "hidden"
-                    }  left-0 z-10 top-14 w-fit md:ml-96`}
+                    }  left-0 z-10 top-14 md:w-fit md:bg-white md:ml-96 bg-slate-200 w-full mt-4 rounded-lg`}
             >
                 <ul className={navContainer()}>
                     <Link href="/tours" className={navLink()}>
@@ -62,9 +62,6 @@ function Nav() {
                     <Link href="/tours/search" className={navLink()}>
                         Search Tour
                     </Link>
-                    {/* <Link href="/login" className={navLink()}>
-                        Login
-                    </Link> */}
                     <Link href="/admin" className={navLink()}>
                         Admin
                     </Link>
