@@ -3,31 +3,32 @@ import { DestinationSection } from "../components/DestinationSection";
 import { Footer } from "../components/Footer";
 import { BackToTopBtn } from "../components/BackToTopBtn";
 import { Main } from "../components/Main";
-import { Inertia } from "@inertiajs/inertia";
+import { TTours } from "../types/type";
+import { router } from "@inertiajs/react";
 
-function Home({ tours }) {
+function Home({ tours }: { tours: TTours }) {
+
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(0);
     const [search, setSearch] = useState("");
     const [date, setDate] = useState("");
 
-    const handleSearchTour = (tourName) => {
-        Inertia.get(
+    const handleSearchTour = (tourName: string) => {
+        router.get(
             "/tours",
             { searchTour: tourName },
-            { preserveState: true }
+            {
+                preserveState: true,
+                preserveScroll: true
+            },
+
         );
     };
-
-    const handleSelectDate = (e) => {
-        setDate(e.target.value);
-    };
-
-    const handleFilterTourByDate = (date) => {
+    const handleFilterTourByDate = (date: string) => {
         if (date === "") {
-            Inertia.get("/tours");
+            router.get("/tours");
         } else {
-            Inertia.get(
+            router.get(
                 "/tours",
                 { filterDate: date },
                 { preserveState: true }
@@ -35,8 +36,8 @@ function Home({ tours }) {
         }
     };
 
-    const handleFilterTourByPrice = (minPrice, maxPrice) => {
-        Inertia.get(
+    const handleFilterTourByPrice = (minPrice: number, maxPrice: number) => {
+        router.get(
             "/tours",
             {
                 minPrice,
@@ -47,10 +48,10 @@ function Home({ tours }) {
     };
 
     const handleClearFilter = () => {
-        Inertia.get("/tours");
+        router.get("/tours");
     };
 
-    const handleFilter = (e) => {
+    const handleFilter = (e: React.MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
         if (search !== "") {
             handleSearchTour(search);

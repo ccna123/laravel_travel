@@ -1,32 +1,33 @@
 import React from "react";
+import { TBookingDetailInfo } from "../types/type";
 
 const Details = ({
-    tourDetailInfo,
-    place_price,
+    tour,
+    destinationPrice,
     calculateNumberOfChildren,
     calculateNumberOfStay,
     calculateNumberOfAdult,
     calculateTransportationFee,
     calculateTotal,
-}) => {
+}: TBookingDetailInfo) => {
     return (
         <section className="bg-white w-full p-3 rounded-md ">
             <div className="gap-4 grid grid-cols-2 items-center my-3">
                 <section className="w-full">
                     <p>
-                        Number of stays: {tourDetailInfo.number_of_stay}{" "}
+                        Number of stays: {tour.number_of_stay}{" "}
                         <span>(10$/1 stay)</span>
                     </p>
                     <p>
-                        Adult: {tourDetailInfo.number_of_adult}{" "}
-                        <span>({place_price}$/1 person)</span>
+                        Adult: {tour.number_of_adult}{" "}
+                        <span>({destinationPrice}$/1 person)</span>
                     </p>
                     <p>
-                        Childrend: {tourDetailInfo.number_of_children}{" "}
+                        Childrend: {tour.number_of_children}{" "}
                         <span>(283$/1 child)</span>
                     </p>
                     <p>
-                        Transportation: {tourDetailInfo.transportation}{" "}
+                        Transportation: {tour.transportation}{" "}
                         <span>({calculateTransportationFee}$)</span>{" "}
                     </p>
                 </section>

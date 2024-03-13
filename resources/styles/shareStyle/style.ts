@@ -1,4 +1,4 @@
-export const btnStyle = (type) => {
+export const btnStyle = (type: string) => {
     switch (type) {
         case "book":
             return "w-full font-bold bg-green-500 p-2 rounded-md text-white hover:cursor-pointer hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)] duration-150";

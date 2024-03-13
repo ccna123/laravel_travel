@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import bgVideo from "../../../public/imgs/bgVideo.mp4";
 import {
     inputStyle,
@@ -6,6 +6,20 @@ import {
     textStyle,
 } from "../../styles/mainSectionSearchDestinationStyle/style";
 import { btnStyle } from "../../styles/shareStyle/style";
+
+type MainProps = {
+    date: string,
+    search: string,
+    minPrice: number,
+    maxPrice: number,
+    setMinPrice: React.Dispatch<React.SetStateAction<number>>
+    setMaxPrice: React.Dispatch<React.SetStateAction<number>>
+    setSearch: React.Dispatch<React.SetStateAction<string>>
+    setDate: React.Dispatch<React.SetStateAction<string>>
+    handleClearFilter: () => void,
+    handleFilter: (e: React.MouseEvent<HTMLButtonElement>) => void,
+
+}
 
 export const Main = ({
     date,
@@ -18,7 +32,7 @@ export const Main = ({
     setMaxPrice,
     handleClearFilter,
     handleFilter,
-}) => {
+}: MainProps) => {
     return (
         <div className="w-fit">
             <video
@@ -80,7 +94,7 @@ export const Main = ({
                                         max={2000}
                                         value={minPrice}
                                         onChange={(e) =>
-                                            setMinPrice(e.target.value)
+                                            setMinPrice(Number(e.target.value))
                                         }
                                         className={priceInputStyle()}
                                     />
@@ -91,7 +105,7 @@ export const Main = ({
                                         max={2000}
                                         value={maxPrice}
                                         onChange={(e) =>
-                                            setMaxPrice(e.target.value)
+                                            setMaxPrice(Number(e.target.value))
                                         }
                                         className={priceInputStyle()}
                                     />
@@ -103,7 +117,7 @@ export const Main = ({
                         <button
                             type="button"
                             className={btnStyle("filter")}
-                            onClick={handleFilter}
+                            onClick={e => handleFilter(e)}
                         >
                             Filter
                         </button>

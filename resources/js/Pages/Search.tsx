@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import BookingInfo from "../components/BookingInfo";
-const Search = ({ tour }) => {
+import { IBookingInfo } from "../types/interface";
+import { router } from "@inertiajs/react";
+
+const Search = ({ tour }: { tour: IBookingInfo }) => {
     const [searchInput, setSearchInput] = useState("");
 
-    const handleSearchTour = () => {
-        Inertia.post("/tours/search", { searchInput });
+    const handleSearchTour = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+        e.preventDefault()
+        router.post("/tours/search", { searchInput });
     };
+
     return (
         <div className="bg-slate-200 min-h-screen p-4 overflow-hidden">
             <div className="lg:w-[80%] mx-auto">
                 <div className="flex mx-auto">
                     <span
-                        onClick={handleSearchTour}
+                        onClick={e => handleSearchTour(e)}
                         className="inline-flex cursor-pointer items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600"
                     >
                         <i className="fa-solid fa-magnifying-glass"></i>

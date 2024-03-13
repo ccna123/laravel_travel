@@ -3,12 +3,28 @@ import CustomerInfoInput from "./CustomerInfoInput";
 import TourInfoInput from "./TourInfoInput";
 import Details from "./Details";
 import { btnStyle } from "../../styles/shareStyle/style";
+import { Order, TBookingDetailInfo, TBookingInfo, TErrors, TTour } from "../types/type";
+import { IBookingInfo, IErrors, ITour, ITourDetail } from "../types/interface";
+
+type OrderProps = {
+    errors: TErrors,
+    data: TBookingInfo,
+    processing: boolean,
+    destinationPrice: number,
+    calculateNumberOfStay: number,
+    calculateNumberOfAdult: number,
+    calculateNumberOfChildren: number,
+    calculateTransportationFee: number,
+    calculateTotal: number,
+    handleOnChange: (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => void,
+    handleSubmit: (e: React.MouseEvent<HTMLButtonElement>) => void,
+}
 
 function Order({
-    place,
     errors,
-    form,
-    tourDetail,
+    data,
+    processing,
+    destinationPrice,
     calculateNumberOfStay,
     calculateNumberOfAdult,
     calculateNumberOfChildren,
@@ -16,25 +32,25 @@ function Order({
     calculateTotal,
     handleOnChange,
     handleSubmit,
-}) {
+}: OrderProps) {
     return (
         <div className="bg-slate-200 rounded-xl shadow-xl p-4">
             <div className="grid grid-cols-1 gap-5">
-                <form onSubmit={handleSubmit}>
+                <form>
                     <CustomerInfoInput
-                        customer_name={form.customer_name}
-                        customer_address={form.customer_address}
-                        customer_email={form.customer_email}
-                        customer_phone={form.customer_phone}
+                        customer_name={data.customer_name ?? ""}
+                        customer_address={data.customer_address ?? ""}
+                        customer_email={data.customer_email ?? ""}
+                        customer_phone={data.customer_phone ?? ""}
                         handleOnChange={handleOnChange}
                         errors={errors}
                     />
                     <TourInfoInput
-                        number_of_stay={form.number_of_stay}
-                        number_of_people={form.number_of_people}
-                        number_of_adult={form.number_of_adult}
-                        number_of_children={form.number_of_children}
-                        transportation={form.transportation}
+                        number_of_stay={data.number_of_stay ?? 0}
+                        number_of_people={data.number_of_people ?? 0}
+                        number_of_adult={data.number_of_adult ?? 0}
+                        number_of_children={data.number_of_children ?? 0}
+                        transportation={data.transportation ?? ""}
                         handleOnChange={handleOnChange}
                         errors={errors}
                     />
@@ -44,16 +60,18 @@ function Order({
                         </p>
                     ) : null}
                     <button
-                        type="submit"
+                        onClick={e => handleSubmit(e)}
+                        type="button"
                         className={btnStyle("book") + " mt-5"}
+                        disabled={processing}
                     >
                         Booking
                     </button>
                 </form>
 
                 <Details
-                    place_price={place.price}
-                    tourDetailInfo={tourDetail}
+                    tour={data}
+                    destinationPrice={destinationPrice}
                     calculateNumberOfAdult={calculateNumberOfAdult}
                     calculateNumberOfChildren={calculateNumberOfChildren}
                     calculateNumberOfStay={calculateNumberOfStay}

@@ -9,8 +9,10 @@ import { DestinationTable } from "../components/DestinationTable";
 import { BookingTable } from "../components/BookingTable";
 import Tab from "../components/Tab";
 import { fontBold } from "../../styles/destinationCardStyle/style";
+import { bookingStatusEnum, bookingStatusType } from "../types/type";
+import { router } from "@inertiajs/react";
 
-const Admin = ({ tours, errors, bookings }) => {
+const Admin = ({ tours, errors, bookings }: any) => {
     const [toggleModal, setToggleModal] = useState(false);
     const [errorsList, setErrorsList] = useState({});
 
@@ -39,37 +41,39 @@ const Admin = ({ tours, errors, bookings }) => {
         }
     };
 
-    const onDelete = (e, id) => {
+    const onDelete = (e: React.MouseEvent<HTMLButtonElement>, id: number) => {
         e.preventDefault();
-        Inertia.delete(`/admin/${id}`, {
+        router.delete(`/admin/${id}`, {
             onSuccess: () => {
                 notify("Deleted successfully", 300);
             },
         });
     };
 
-    const onImageChange = (e) => handleImageChange(e, setData);
+    const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => handleImageChange(e, setData);
 
-    const onAdd = (e) => {
+    const onAdd = (e: React.MouseEvent<HTMLButtonElement>): void => {
         e.preventDefault();
-        Inertia.post("/admin", data, {
+        console.log(123);
+
+        router.post("/admin", data, {
             onSuccess: () => {
                 notify("Add new destination successfully", 200);
             },
         });
     };
-    const handleChangeTab = (index) => {
+    const handleChangeTab = (index: number) => {
         setSelectedTab(index);
     };
 
-    const totalBooked = bookings.reduce((total, booking) => {
-        if (booking.status === "Booked") {
+    const totalBooked = bookings.reduce((total: number, booking: bookingStatusType) => {
+        if (booking.status === bookingStatusEnum.Booked) {
             total += 1;
         }
         return total;
     }, 0);
-    const totalCancel = bookings.reduce((total, booking) => {
-        if (booking.status === "Cancel") {
+    const totalCancel = bookings.reduce((total: number, booking: bookingStatusType) => {
+        if (booking.status === bookingStatusEnum.Cancel) {
             total += 1;
         }
         return total;
@@ -101,11 +105,11 @@ const Admin = ({ tours, errors, bookings }) => {
                     errors={errorsList}
                     data={data}
                     processing={processing}
+                    handleToggleModal={handleToggleModal}
+                    onImageChange={onImageChange}
                     onAdd={onAdd}
                     setData={setData}
-                    onDelete={onDelete}
-                    onImageChange={onImageChange}
-                    handleToggleModal={handleToggleModal}
+
                 />
             ) : null}
             {selectedTab === 1 ? (

@@ -1,16 +1,28 @@
 import React from "react";
 import { errorStyle } from "../helper/error";
+import { IErrors, ITour } from "../types/interface";
+
+type AddModalProps = {
+    data: ITour,
+    processing: boolean,
+    errors: IErrors,
+    handleToggleModal: () => void,
+    onImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    onAdd: (e: React.MouseEvent<HTMLButtonElement>) => void,
+    setData: (key: string, value: string | number) => void
+}
 
 const AddModal = ({
-    handleToggleModal,
     errors,
     data,
     processing,
     setData,
-    onAdd,
+    handleToggleModal,
     onImageChange,
-}) => {
-    const handleImageChange = (e) => {
+    onAdd,
+
+}: AddModalProps) => {
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         onImageChange(e);
     };
 
@@ -18,14 +30,14 @@ const AddModal = ({
         handleToggleModal();
     };
 
-    const handleAdd = (e) => {
+    const handleAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
         onAdd(e);
     };
     return (
         <div className="bg-gray-600/50 w-full min-h-full absolute top-0 left-0">
             <section className="bg-white p-2 rounded-md mt-24 w-[80%] mx-auto">
                 <form
-                    onSubmit={onAdd}
+                    // onSubmit={onAdd}
                     className="mx-auto w-[50%]"
                     encType="multipart/form-data"
                 >
@@ -118,9 +130,8 @@ const AddModal = ({
                         </div>
                     </section>
                     <section
-                        className={`grid ${
-                            data.image ? "grid-cols-2" : "grid-cols-1"
-                        }  items-center gap-2`}
+                        className={`grid ${data.image ? "grid-cols-2" : "grid-cols-1"
+                            }  items-center gap-2`}
                     >
                         <div className="mb-5">
                             <label
@@ -139,7 +150,7 @@ const AddModal = ({
                         </div>
                         {data.image ? (
                             <img
-                                src={URL.createObjectURL(data.image)}
+                                src={typeof data.image === "string" ? data.image : URL.createObjectURL(data.image)}
                                 className="h-[200px] w-full bg-cover"
                             />
                         ) : null}
@@ -153,8 +164,8 @@ const AddModal = ({
                             Description
                         </label>
                         <textarea
-                            cols="10"
-                            rows="5"
+                            cols={10}
+                            rows={5}
                             value={data.description}
                             onChange={(e) =>
                                 setData("description", e.target.value)
@@ -164,16 +175,15 @@ const AddModal = ({
                     </div>
                     <div className="grid md:rid-cols-2 gap-4">
                         <section
-                            onClick={(e) => handleAdd(e)}
-                            className={`flex items-center gap-4 justify-center ${
-                                processing ? "bg-green-500/50" : "bg-green-500"
-                            }  text-white cursor-pointer font-bold text-xl p-2 rounded-md hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)] duration-150`}
+                            onClick={(e) => handleAdd}
+                            className={`flex items-center gap-4 justify-center ${processing ? "bg-green-500/50" : "bg-green-500"
+                                }  text-white cursor-pointer font-bold text-xl p-2 rounded-md hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)] duration-150`}
                         >
                             {processing ? (
                                 <div role="status">
                                     <svg
                                         aria-hidden="true"
-                                        class="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300"
+                                        className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-gray-300"
                                         viewBox="0 0 100 101"
                                         fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -189,7 +199,7 @@ const AddModal = ({
                                     </svg>
                                 </div>
                             ) : (
-                                <button disabled={processing} type="submit">
+                                <button onClick={e => handleAdd(e)} disabled={processing} type="button">
                                     Save
                                 </button>
                             )}

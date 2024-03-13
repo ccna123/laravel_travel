@@ -1,6 +1,7 @@
 import React from "react";
+import { IBookingInfo } from "../types/interface";
 
-const BookingInfo = ({ tour }) => {
+const BookingInfo = ({ tour }: { tour: IBookingInfo }) => {
     return (
         <div className=" bg-white rounded-md p-2 text-xl mt-4">
             <section>
@@ -8,11 +9,10 @@ const BookingInfo = ({ tour }) => {
                     <span>Customer: </span>
                     <span>{tour.customer_name}</span>
                     <span
-                        className={`ml-10 ${
-                            tour.status === "Booked"
-                                ? "bg-green-500"
-                                : "bg-red-500"
-                        }  p-2 rounded-md font-bold text-white`}
+                        className={`ml-10 ${tour.status === "Booked"
+                            ? "bg-green-500"
+                            : "bg-red-500"
+                            }  p-2 rounded-md font-bold text-white`}
                     >
                         {tour.status}
                     </span>
@@ -67,7 +67,7 @@ const BookingInfo = ({ tour }) => {
             <section className="flex justify-between items-center">
                 <p className="text-2xl font-bold">Total</p>
                 <p className="text-2xl text-red-500 font-bold">
-                    {tour.total.toLocaleString()}$
+                    {tour.total?.toLocaleString()}$
                 </p>
             </section>
         </div>

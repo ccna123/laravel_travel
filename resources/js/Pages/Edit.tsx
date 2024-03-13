@@ -5,8 +5,10 @@ import { errorStyle } from "../helper/error";
 import { notify } from "../helper/notfication";
 import { Inertia } from "@inertiajs/inertia";
 import { ToastContainer } from "react-toastify";
+import { Link } from "@inertiajs/react";
+import { IErrors, ITour } from "../types/interface";
 
-const Edit = ({ tour, errors }) => {
+const Edit = ({ tour, errors }: { tour: ITour, errors: IErrors }) => {
     const { data, processing, setData, put } = useForm({
         place_name_jp: tour.place_name_jp || "",
         place_name_en: tour.place_name_en || "",
@@ -18,9 +20,9 @@ const Edit = ({ tour, errors }) => {
         _method: "PUT",
     });
 
-    const onImageChange = (e) => handleImageChange(e, setData);
+    const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => handleImageChange(e, setData);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         Inertia.post(`/admin/${tour.id}`, data, {
             onSuccess: () => {
@@ -33,7 +35,6 @@ const Edit = ({ tour, errors }) => {
         <section className="mt-10">
             <ToastContainer />
             <form
-                onSubmit={handleSubmit}
                 className="mx-auto w-[50%] my-4 shadow-[0px_10px_1px_rgba(221,_221,_221,_1),_0_10px_20px_rgba(204,_204,_204,_1)] p-4 rounded-md"
             >
                 <input type="hidden" name="_method" value="PUT" />
@@ -106,14 +107,13 @@ const Edit = ({ tour, errors }) => {
                             id="price"
                             className={errorStyle(errors.price)}
                             value={data.price}
-                            onChange={(e) => setData("price", e.target.value)}
+                            onChange={(e) => setData("price", Number(e.target.value))}
                         />
                     </div>
                 </section>
                 <section
-                    className={`grid ${
-                        data.image ? "grid-cols-2" : "grid-cols-1"
-                    }  items-center gap-2`}
+                    className={`grid ${data.image ? "grid-cols-2" : "grid-cols-1"
+                        }  items-center gap-2`}
                 >
                     <div className="mb-5">
                         <label
@@ -125,7 +125,7 @@ const Edit = ({ tour, errors }) => {
                         <input
                             type="file"
                             name="image"
-                            onChange={(e) => onImageChange(e, setData)}
+                            onChange={(e) => onImageChange}
                             id="username-success"
                             className={errorStyle(errors.image)}
                         />
@@ -146,21 +146,21 @@ const Edit = ({ tour, errors }) => {
                         value={data.description}
                         onChange={(e) => setData("description", e.target.value)}
                         id="description"
-                        cols="20"
-                        rows="10"
+                        cols={20}
+                        rows={10}
                         className={errorStyle(errors.description)}
                     />
                 </div>
                 <section className="grid grid-cols-2 items-center gap-4">
-                    <button className="bg-green-500 p-2 rounded-md text-white font-bold hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)] duration-150">
+                    <button disabled={processing} onClick={e => handleSubmit} className="bg-green-500 p-2 rounded-md text-white font-bold hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)] duration-150">
                         Save
                     </button>
-                    <InertiaLink
+                    <Link
                         href="/admin"
                         className="bg-red-500 p-2 rounded-md text-center text-white font-bold hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)] duration-150"
                     >
                         Cancel
-                    </InertiaLink>
+                    </Link>
                 </section>
             </form>
         </section>

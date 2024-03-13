@@ -2,6 +2,7 @@ import { InertiaLink } from "@inertiajs/inertia-react";
 import React, { useEffect, useState } from "react";
 import navLink from "../../styles/navStyles/navLink";
 import navContainer from "../../styles/navStyles/navContainer";
+import { Link } from "@inertiajs/react";
 
 function Nav() {
     const [isNavOpen, setIsNavOpen] = useState(false);
@@ -23,13 +24,15 @@ function Nav() {
     }, []);
 
     return (
-        <div className="bg-white flex flex-col lg:flex-row lg:justify-between lg:items-center p-4 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+        <div className="bg-white flex flex-col lg:flex-row lg:justify-between lg:items-center p-4">
             <div className="flex justify-between">
                 <div className="flex items-center">
-                    <img
-                        src="/imgs/airplane.png"
-                        className="w-16 h-16 text-white"
-                    />
+                    <Link href="/">
+                        <img
+                            src="/imgs/airplane.png"
+                            className="w-16 h-16 text-white"
+                        />
+                    </Link>
                 </div>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -48,24 +51,20 @@ function Nav() {
                 </svg>
             </div>
             <nav
-                className={`${
-                    isNavOpen ? "flex" : "hidden"
-                }  left-0 z-10 top-14 w-fit md:ml-96`}
+                className={`${isNavOpen ? "flex" : "hidden"
+                    }  left-0 z-10 top-14 md:w-fit md:bg-white md:ml-96 bg-slate-200 w-full mt-4 rounded-lg`}
             >
                 <ul className={navContainer()}>
-                    <InertiaLink href="/tours" className={navLink()}>
+                    <Link href="/tours" className={navLink()}>
                         Home
-                    </InertiaLink>
+                    </Link>
 
-                    <InertiaLink href="/tours/search" className={navLink()}>
+                    <Link href="/tours/search" className={navLink()}>
                         Search Tour
-                    </InertiaLink>
-                    <InertiaLink href="/login" className={navLink()}>
-                        Login
-                    </InertiaLink>
-                    <InertiaLink href="/admin" className={navLink()}>
+                    </Link>
+                    <Link href="/admin" className={navLink()}>
                         Admin
-                    </InertiaLink>
+                    </Link>
                 </ul>
             </nav>
         </div>

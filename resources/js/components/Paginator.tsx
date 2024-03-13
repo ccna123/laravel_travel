@@ -1,43 +1,44 @@
-import { InertiaLink } from "@inertiajs/inertia-react";
 import React from "react";
+import { TLink } from "../types/type";
+import { Link } from "@inertiajs/react";
 
-const Paginator = ({ links }) => {
+
+const Paginator = ({ links }: { links: TLink[] }) => {
     return (
         <div className="text-center mt-2 flex gap-4 justify-center">
-            {links.map((link) => {
+            {links.map((link: TLink) => {
                 return (
                     <div
                         key={link.label}
-                        className={`${
-                            link.active
-                                ? "bg-green-500 text-black"
-                                : "text-black font-bold"
-                        } px-3 py-2 rounded`}
+                        className={`${link.active
+                            ? "bg-green-500 text-black"
+                            : "text-black font-bold"
+                            } px-3 py-2 rounded`}
                     >
                         {link.label === "&laquo; Previous" ? (
-                            <InertiaLink
+                            <Link
                                 preserveScroll={true}
                                 preserveState={true}
                                 href={link.url}
                             >
                                 &laquo; Previous
-                            </InertiaLink>
+                            </Link>
                         ) : link.label === "Next &raquo;" ? (
-                            <InertiaLink
+                            <Link
                                 preserveScroll={true}
                                 preserveState={true}
                                 href={link.url}
                             >
                                 Next &raquo;
-                            </InertiaLink>
+                            </Link>
                         ) : (
-                            <InertiaLink
+                            <Link
                                 preserveScroll={true}
                                 preserveState={true}
                                 href={link.url}
                             >
                                 {link.label}
-                            </InertiaLink>
+                            </Link>
                         )}
                     </div>
                 );

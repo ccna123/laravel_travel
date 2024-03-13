@@ -3,8 +3,11 @@ import { StarRating } from "./StarRating";
 import { InertiaLink } from "@inertiajs/inertia-react";
 import { fontBold } from "../../styles/destinationCardStyle/style";
 import { btnStyle } from "../../styles/shareStyle/style";
+import { ITour } from "../types/interface";
+import { TTour } from "../types/type";
+import { Link } from "@inertiajs/react";
 
-function DestinationCard({ place, handleToggleModal }) {
+function DestinationCard({ place }: { place: TTour }) {
     const isBookingPage = window.location.href.includes("booking");
     const isAdminsPage = window.location.href.includes("admin");
     return (
@@ -23,9 +26,9 @@ function DestinationCard({ place, handleToggleModal }) {
                     <p>{place.location}</p>
                 </div>
                 <p>Departure: {place.departure_date}</p>
-                <div className="flex gap-4 mt-4">
+                {/* <div className="flex gap-4 mt-4">
                     <StarRating />
-                </div>
+                </div> */}
                 <hr className="border my-4" />
                 <div className="flex justify-around items-center">
                     <p className={fontBold() + " text-4xl"}>Price</p>
@@ -44,20 +47,19 @@ function DestinationCard({ place, handleToggleModal }) {
                     </p>
                 </div>
                 {isBookingPage ? (
-                    <InertiaLink
+                    <Link
                         as="button"
                         href="/"
                         className={btnStyle("back") + " mt-5"}
                     >
                         Go back
-                    </InertiaLink>
+                    </Link>
                 ) : isAdminsPage ? (
-                    <div
+                    <Link
                         href={`booking/${place.id}`}
                         className="duration-150 mt-4 w-fit px-4 py-2 rounded-2xl flex items-center gap-4 "
                     >
                         <button
-                            onClick={() => handleToggleModal(true)}
                             type="button"
                             className={btnStyle("edit")}
                         >
@@ -66,15 +68,15 @@ function DestinationCard({ place, handleToggleModal }) {
                         <button type="button" className={btnStyle("delete")}>
                             Delete
                         </button>
-                    </div>
+                    </Link>
                 ) : (
-                    <InertiaLink
+                    <Link
                         as="button"
                         href={`booking/${place.id}`}
                         className={btnStyle("book") + " mt-4"}
                     >
                         Book
-                    </InertiaLink>
+                    </Link>
                 )}
             </div>
         </div>
