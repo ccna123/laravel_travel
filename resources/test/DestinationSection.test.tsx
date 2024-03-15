@@ -1,6 +1,8 @@
 import { render } from "@testing-library/react"
 import { DestinationSection } from "../js/components/DestinationSection"
 import React from "react"
+import "@testing-library/jest-dom";
+// import "@testing-library/jest-dom/vitest";
 
 describe('Home page test', () => {
     const mockData = {

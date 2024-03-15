@@ -1,0 +1,6 @@
+import { fireEvent, getByTestId, render, screen, waitFor } from "@testing-library/react"
+import React from "react"
+import userEvent from "@testing-library/user-event"
+import "@testing-library/jest-dom"
+import Booking from "../js/Pages/Booking"
+import { router } from "@inertiajs/react"

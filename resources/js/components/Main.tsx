@@ -117,7 +117,7 @@ export const Main = ({
                             </div>
                         </div>
                     </div>
-                    <div className="grid md:grid-cols-2 w-[50%] mx-auto mt-4 items-center gap-3">
+                    <div className="grid md:grid-cols-2 md:w-[50%] mx-auto mt-4 items-center gap-3">
                         <button
                             data-testid="filterBtn"
                             type="button"

@@ -25,15 +25,13 @@ function Home({ tours }: { tours: TTours }) {
         );
     };
     const handleFilterTourByDate = (date: string) => {
-        if (date === "") {
-            router.get("/tours");
-        } else {
-            router.get(
-                "/tours",
-                { filterDate: date },
-                { preserveState: true }
-            );
-        }
+
+        router.get(
+            "/tours",
+            { filterDate: date },
+            { preserveState: true }
+        );
+
     };
 
     const handleFilterTourByPrice = (minPrice: number, maxPrice: number) => {
@@ -63,6 +61,8 @@ function Home({ tours }: { tours: TTours }) {
             handleFilterTourByDate(date);
         } else if (minPrice > 0 || maxPrice > 0) {
             handleFilterTourByPrice(minPrice, maxPrice);
+        } else {
+            alert("Please do not leave empty input fields")
         }
     };
 
