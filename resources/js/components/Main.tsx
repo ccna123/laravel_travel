@@ -65,6 +65,7 @@ export const Main = ({
                             </p>
                             <div className="flex justify-between items-center p-2 bg-gray-200 rounded-full">
                                 <input
+                                    data-testid="destination_input"
                                     type="text"
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
@@ -76,6 +77,7 @@ export const Main = ({
                             <p className={textStyle()}>Select date</p>
                             <div className="p-3 bg-gray-200 rounded-full">
                                 <input
+                                    data-testid="date_input"
                                     type="date"
                                     value={date}
                                     onChange={(e) => setDate(e.target.value)}
@@ -89,6 +91,7 @@ export const Main = ({
                             <div className="p-3 w-full bg-gray-200 rounded-full my-4">
                                 <div className="flex gap-2 w-full">
                                     <input
+                                        data-testid="minPrice_input"
                                         type="number"
                                         min={300}
                                         max={2000}
@@ -100,6 +103,7 @@ export const Main = ({
                                     />
                                     <p>~</p>
                                     <input
+                                        data-testid="maxPrice_input"
                                         type="number"
                                         min={300}
                                         max={2000}
@@ -115,6 +119,7 @@ export const Main = ({
                     </div>
                     <div className="grid md:grid-cols-2 w-[50%] mx-auto mt-4 items-center gap-3">
                         <button
+                            data-testid="filterBtn"
                             type="button"
                             className={btnStyle("filter")}
                             onClick={e => handleFilter(e)}
@@ -122,6 +127,7 @@ export const Main = ({
                             Filter
                         </button>
                         <button
+                            data-testid="cancelBtn"
                             type="button"
                             className={btnStyle("cancel")}
                             onClick={handleClearFilter}

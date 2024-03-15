@@ -34,7 +34,7 @@ export type TBookingInfo = {
 
 export type TTours = {
     data: TTour[],
-    links: TLink
+    links: TLink[]
 }
 
 export type TErrors = Omit<TBookingInfo, "destination" | "total" | "status">

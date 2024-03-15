@@ -37,14 +37,18 @@ function Home({ tours }: { tours: TTours }) {
     };
 
     const handleFilterTourByPrice = (minPrice: number, maxPrice: number) => {
-        router.get(
-            "/tours",
-            {
-                minPrice,
-                maxPrice,
-            },
-            { preserveState: true }
-        );
+        if (maxPrice < minPrice) {
+            alert('Please input a max price greater than or equal to the minimum price')
+        } else {
+            router.get(
+                "/tours",
+                {
+                    minPrice,
+                    maxPrice,
+                },
+                { preserveState: true }
+            );
+        }
     };
 
     const handleClearFilter = () => {

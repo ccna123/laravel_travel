@@ -28,5 +28,5 @@
   "exclude": [
       "node_modules"
   ],
-  "types": ["vite/client"] 
+  "types": ["vite/client", "vitest/globals"] 
 }
